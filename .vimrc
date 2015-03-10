@@ -1,5 +1,3 @@
-set background=dark
-colorscheme molokai
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -22,9 +20,7 @@ Plugin 'kshenoy/vim-signature'
 
 nmap <leader>p :CtrlP<CR>
 nmap <leader>n :CtrlPBuffer<CR>
-nnoremap <esc> :noh<return><esc>
-nmap <silent> <leader>re :so $MYVIMRC<CR>
-nmap <J> 5j
+nnoremap <esc> :noh<return>
 map <C-n> :NERDTreeToggle<CR>
 let g:user_emmet_leader_key='<Tab>'
 let mapleader="\<Space>"
@@ -47,8 +43,6 @@ set hlsearch " Highlight search matches
 set incsearch " Search while you enter the query, not after
 set undolevels=1000 " More undos
 set title " Vim can set the title of the terminal window
-set visualbell " Use a visual indicator instead of a beep
-set noerrorbells " Or just turn error bells off with this
 set t_Co=256 " Tell vim that your terminal supports 256 colors
 set pastetoggle=<F2> " Toggle paste mode with F2
 set number " Line numbers
