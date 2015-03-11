@@ -4,6 +4,8 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
+syntax on
+colorscheme distinguished
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim' "Vundle, plugin manager
 Plugin 'jelera/vim-javascript-syntax' "Js syntax
@@ -20,10 +22,10 @@ Plugin 'kshenoy/vim-signature'
 
 nmap <leader>p :CtrlP<CR>
 nmap <leader>n :CtrlPBuffer<CR>
-nnoremap <esc> :noh<return>
+nnoremap <leader>s :noh<return>
 map <C-n> :NERDTreeToggle<CR>
 let g:user_emmet_leader_key='<Tab>'
-let mapleader="\<Space>"
+map <Space> <leader>
 set hidden
 let g:neocomplete#enable_at_startup = 1
 
