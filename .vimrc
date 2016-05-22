@@ -1,57 +1,56 @@
 silent! call plug#begin()
-"Plug 'jelera/vim-javascript-syntax' "Js syntax
-"Plug 'pangloss/vim-javascript' "Js highlighting, indentation fix
-Plug 'othree/yajs.vim', { 'for': 'javascript' }
-Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
+"General
 Plug 'flazz/vim-colorschemes' 
 Plug 'nathanaelkane/vim-indent-guides' "highlight callback hells
-Plug 'Raimondi/delimitMate' "Add closing quote, bracket etc
+Plug 'jiangmiao/auto-pairs' "Add closing quote, bracket etc
 Plug 'scrooloose/syntastic' "Lintin
 Plug 'scrooloose/nerdtree'
-Plug 'mattn/emmet-vim' "Emmet
-Plug 'mxw/vim-jsx'
-Plug 'Rykka/colorv.vim'
-Plug 'othree/jspc.vim'
-Plug 'https://github.com/kien/ctrlp.vim'
-Plug 'othree/html5.vim'
+Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter' "Comment and uncoment code 
 Plug 'kshenoy/vim-signature' "Display marks on the side
-Plug 'dkprice/vim-easygrep'
-Plug 'Shougo/neocomplete' "Autocomplete
-Plug 'ap/vim-css-color' "Color preview in css
-Plug 'itchyny/lightline.vim' "Nicer status bar
-Plug 'airblade/vim-gitgutter' 
 Plug 'vim-airline/vim-airline' 
 Plug 'vim-airline/vim-airline-themes' 
-Plug 'easymotion/vim-easymotion' 
+Plug 'dkprice/vim-easygrep'
 Plug 'tpope/vim-surround' 
-Plug 'tpope/vim-fugitive' 
-Plug 'tpope/vim-ragtag' "Faster creating of tags
 Plug 'rking/ag.vim' 
-Plug 'OrangeT/vim-csharp' 
-Plug 'gregsexton/MatchTag' "Matches current html tag
+Plug 'editorconfig/editorconfig-vim' "Matches current html tag
 Plug 'duggiefresh/vim-easydir' "Creates folder if not exists, new file
+"HTML/CSS
+Plug 'mattn/emmet-vim' "Emmet
+Plug 'Rykka/colorv.vim'
+Plug 'othree/html5.vim'
+Plug 'ap/vim-css-color' "Color preview in css
+Plug 'tpope/vim-ragtag' "Faster creating of tags
+Plug 'gregsexton/MatchTag' "Matches current html tag
+"JS
+Plug 'othree/jspc.vim'
+Plug 'mxw/vim-jsx'
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
+"Git
+Plug 'airblade/vim-gitgutter' 
+Plug 'tpope/vim-fugitive' 
+"Other 
+Plug 'plasticboy/vim-markdown'
+Plug 'OrangeT/vim-csharp' 
 call plug#end()
 
-if has("gui_running")
-    set background=dark
-    colorscheme tomorrow-night
-endif
 
 map <Space> <leader>
 nmap <leader>p :CtrlP<CR>
-nmap <leader>n :CtrlPBuffer<CR>
-nmap <leader>n :CtrlPBuffer<CR>
+nmap <leader>b :CtrlPBuffer<CR>
+map <leader>n :NERDTreeToggle<CR>
 nmap <S-Enter> O<Esc>
 "Indent whole file, move back to cursor pos
 nmap <F1> gg=G'' 
 " Remove surrounding tag
 nmap <F3> yitvatp
 nmap <F4> :so $MYVIMRC<CR>
-nmap <CR> o<Esc>
 nnoremap <CR> :noh<CR><CR>
-map <C-n> :NERDTreeToggle<CR>
-nmap ,n :NERDTreeFind<CR>
+nnoremap <C-n> :bnext<CR>
+nmap <C-p> :bprev<CR>
+nnoremap <C-q> :bdelete<CR>
+nmap ,r :NERDTreeFind<CR>
 let g:user_emmet_leader_key='<C-x>'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -65,10 +64,12 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ag_working_path_mode="r"
 set wildignore+=*/.git/*,*/node_modules/*,*/.DS_Store,*/bin/*,*/obj/*
 set wildignore+=*.bmp,*.jpg,*.gif,*.jpeg,*.png,*.dll,*.exe,*.ico
+let g:indent_guides_start_level = 2
 
 syntax enable " Enable syntax processing
 filetype plugin on
 runtime macros/matchit.vim "Needed to get matchit to work on html tags?
+
 set nocompatible
 set hidden
 set noshowmode
@@ -88,16 +89,29 @@ set incsearch " Search while you enter the query, not after
 set undolevels=1000 " More undos
 set title " Vim can set the title of the terminal window
 set t_Co=256 " Tell vim that your terminal supports 256 colors
-set pastetoggle=<F2> " Toggle paste mode with F2
 set number " Line numbers
 set vb t_vb= " No beeping or flickering on error
 set nobackup "no backup files
 set noswapfile
+set encoding=utf-8   
+let g:syntastic_javascript_checkers = ['eslint']
+
+"Airline
+set laststatus=2 " vim-airline always show
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+"Gvim settings
+set lines=10000 columns=10000 "Start gvim maximized
+au GUIEnter * simalt ~x
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
-set laststatus=2 " vim-airline always show
-let g:airline_powerline_fonts = 1
-let g:syntastic_javascript_checkers = ['eslint']
 
+if has("gui_running")
+    set background=dark
+    colorscheme tomorrow-night
+    set guifont=InconsolataForPowerline:h11
+endif
