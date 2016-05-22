@@ -5,7 +5,7 @@ Plug 'nathanaelkane/vim-indent-guides' "highlight callback hells
 Plug 'jiangmiao/auto-pairs' "Add closing quote, bracket etc
 Plug 'scrooloose/syntastic' "Lintin
 Plug 'scrooloose/nerdtree'
-Plug 'kien/ctrlp.vim'
+Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter' "Comment and uncoment code 
 Plug 'kshenoy/vim-signature' "Display marks on the side
 Plug 'vim-airline/vim-airline' 
@@ -13,6 +13,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'dkprice/vim-easygrep'
 Plug 'tpope/vim-surround' 
 Plug 'rking/ag.vim' 
+Plug 'SirVer/ultisnips' 
 Plug 'editorconfig/editorconfig-vim' "Matches current html tag
 Plug 'duggiefresh/vim-easydir' "Creates folder if not exists, new file
 "HTML/CSS
@@ -23,9 +24,8 @@ Plug 'ap/vim-css-color' "Color preview in css
 Plug 'tpope/vim-ragtag' "Faster creating of tags
 Plug 'gregsexton/MatchTag' "Matches current html tag
 "JS
-Plug 'othree/jspc.vim'
 Plug 'mxw/vim-jsx'
-Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'othree/yajs.vim', { 'for': 'javascript' } "Js syntax
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
 "Git
 Plug 'airblade/vim-gitgutter' 
@@ -65,6 +65,7 @@ let g:ag_working_path_mode="r"
 set wildignore+=*/.git/*,*/node_modules/*,*/.DS_Store,*/bin/*,*/obj/*
 set wildignore+=*.bmp,*.jpg,*.gif,*.jpeg,*.png,*.dll,*.exe,*.ico
 let g:indent_guides_start_level = 2
+let g:used_javascript_libs = 'jQuery,angular,react'
 
 syntax enable " Enable syntax processing
 filetype plugin on
