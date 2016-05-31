@@ -13,9 +13,12 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'dkprice/vim-easygrep'
 Plug 'tpope/vim-surround' 
 Plug 'rking/ag.vim' 
-Plug 'SirVer/ultisnips' 
+Plug 'AndrewRadev/splitjoin.vim' 
 Plug 'editorconfig/editorconfig-vim' "Matches current html tag
 Plug 'duggiefresh/vim-easydir' "Creates folder if not exists, new file
+Plug 'honza/vim-snippets' "Snippet lib
+"Plug 'Valloric/YouCompleteMe' 
+Plug 'vim-scripts/BufOnly.vim' "Close all but current buffer
 "HTML/CSS
 Plug 'mattn/emmet-vim' "Emmet
 Plug 'Rykka/colorv.vim'
@@ -43,15 +46,37 @@ map <leader>n :NERDTreeToggle<CR>
 nmap <S-Enter> O<Esc>
 "Indent whole file, move back to cursor pos
 nmap <F1> gg=G'' 
+nmap <F2> :BufOnly<CR>
 " Remove surrounding tag
 nmap <F3> yitvatp
 nmap <F4> :so $MYVIMRC<CR>
+nmap <F5> :set wrap linebreak nolist<CR>
+nmap <F11> <Plug>GitGutterPrevHunk
+nmap <F12> <Plug>GitGutterNextHunk
 nnoremap <CR> :noh<CR><CR>
 nnoremap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
 nnoremap <C-q> :bdelete<CR>
-nmap ,r :NERDTreeFind<CR>
+nmap  :NERDTreeFind<CR>
 let g:user_emmet_leader_key='<C-x>'
+
+"Fugitive key bindings
+nnoremap <space>ga :Git add %:p<CR><CR>
+nnoremap <space>gs :Gstatus<CR>
+nnoremap <space>gc :Gcommit -v -q<CR>
+nnoremap <space>gt :Gcommit -v -q %:p<CR>
+nnoremap <space>gd :Gdiff<CR>
+nnoremap <space>ge :Gedit<CR>
+nnoremap <space>gr :Gread<CR>
+nnoremap <space>gw :Gwrite<CR><CR>
+nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
+nnoremap <space>gp :Ggrep<Space>
+nnoremap <space>gm :Gmove<Space>
+nnoremap <space>gb :Git branch<Space>
+nnoremap <space>go :Git checkout<Space>
+nnoremap <space>gps :Dispatch! git push<CR>
+nnoremap <space>gpl :Dispatch! git pull<CR>
+
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -66,6 +91,9 @@ set wildignore+=*/.git/*,*/node_modules/*,*/.DS_Store,*/bin/*,*/obj/*
 set wildignore+=*.bmp,*.jpg,*.gif,*.jpeg,*.png,*.dll,*.exe,*.ico
 let g:indent_guides_start_level = 2
 let g:used_javascript_libs = 'jQuery,angular,react'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 syntax enable " Enable syntax processing
 filetype plugin on
@@ -74,6 +102,7 @@ runtime macros/matchit.vim "Needed to get matchit to work on html tags?
 set nocompatible
 set hidden
 set noshowmode
+set nofoldenable "Dont fold automatically
 set nowrap " Lines of code will not wrap to the next line
 set backspace=indent,eol,start " Make backspace behave like other editors
 set autoindent " Automatically indent on new lines
@@ -95,7 +124,7 @@ set vb t_vb= " No beeping or flickering on error
 set nobackup "no backup files
 set noswapfile
 set encoding=utf-8   
-let g:syntastic_javascript_checkers = ['eslint']
+"let g:syntastic_javascript_checkers = ['eslint']
 
 "Airline
 set laststatus=2 " vim-airline always show
