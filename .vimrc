@@ -26,6 +26,7 @@ Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color' "Color preview in css
 Plug 'tpope/vim-ragtag' "Faster creating of tags
 Plug 'gregsexton/MatchTag' "Matches current html tag
+Plug 'groenewege/vim-less' 
 "JS
 Plug 'mxw/vim-jsx'
 Plug 'othree/yajs.vim', { 'for': 'javascript' } "Js syntax
@@ -44,10 +45,10 @@ nmap <leader>p :CtrlP<CR>
 nmap <leader>b :CtrlPBuffer<CR>
 map <leader>n :NERDTreeToggle<CR>
 nmap <S-Enter> O<Esc>
-"Indent whole file, move back to cursor pos
+""Indent whole file, move back to cursor pos
 nmap <F1> gg=G'' 
 nmap <F2> :BufOnly<CR>
-" Remove surrounding tag
+"" Remove surrounding tag
 nmap <F3> yitvatp
 nmap <F4> :so $MYVIMRC<CR>
 nmap <F5> :set wrap linebreak nolist<CR>
@@ -57,25 +58,24 @@ nnoremap <CR> :noh<CR><CR>
 nnoremap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
 nnoremap <C-q> :bdelete<CR>
-nmap  :NERDTreeFind<CR>
 let g:user_emmet_leader_key='<C-x>'
 
 "Fugitive key bindings
-nnoremap <space>ga :Git add %:p<CR><CR>
-nnoremap <space>gs :Gstatus<CR>
-nnoremap <space>gc :Gcommit -v -q<CR>
-nnoremap <space>gt :Gcommit -v -q %:p<CR>
-nnoremap <space>gd :Gdiff<CR>
-nnoremap <space>ge :Gedit<CR>
-nnoremap <space>gr :Gread<CR>
-nnoremap <space>gw :Gwrite<CR><CR>
-nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
-nnoremap <space>gp :Ggrep<Space>
-nnoremap <space>gm :Gmove<Space>
-nnoremap <space>gb :Git branch<Space>
-nnoremap <space>go :Git checkout<Space>
-nnoremap <space>gps :Dispatch! git push<CR>
-nnoremap <space>gpl :Dispatch! git pull<CR>
+nnoremap <leader>ga :Git add %:p<CR><CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gc :Gcommit -v -q<CR>
+nnoremap <leader>gt :Gcommit -v -q %:p<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>ge :Gedit<CR>
+nnoremap <leader>gr :Gread<CR>
+nnoremap <leader>gw :Gwrite<CR><CR>
+nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
+nnoremap <leader>gp :Ggrep<Space>
+nnoremap <leader>gm :Gmove<Space>
+nnoremap <leader>gb :Git branch<Space>
+nnoremap <leader>go :Git checkout<Space>
+nnoremap <leader>gps :Dispatch! git push<CR>
+nnoremap <leader>gpl :Dispatch! git pull<CR>
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
