@@ -23,4 +23,4 @@ fp=cd "C:/Program Files (x86)"
 
 ea=gvim C:\cmder\config\aliases
 ev=gvim %HOMEPATH%\.vimrc
-eh=gvim C:\Windows\System32\drivers\etc\hosts
+eh=gvim C:\Windows\System32\drivers\etc\hosts 

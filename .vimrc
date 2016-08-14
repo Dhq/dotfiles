@@ -20,6 +20,7 @@ Plug 'honza/vim-snippets' "Snippet lib
 Plug 'terryma/vim-multiple-cursors' 
 "Plug 'Valloric/YouCompleteMe' 
 Plug 'vim-scripts/BufOnly.vim' "Close all but current buffer
+Plug 'tpope/vim-dispatch' "Dispatch commands from within vim
 "HTML/CSS
 Plug 'mattn/emmet-vim' "Emmet
 Plug 'Rykka/colorv.vim'
@@ -55,8 +56,8 @@ nmap <F2> :BufOnly<CR>
 nmap <F3> yitvatp
 nmap <F4> :so $MYVIMRC<CR>
 nmap <F5> :set wrap linebreak nolist<CR>
-nmap <F11> <Plug>GitGutterPrevHunk
-nmap <F12> <Plug>GitGutterNextHunk
+nmap <Up> <Plug>GitGutterPrevHunk
+nmap <Down> <Plug>GitGutterNextHunk
 nnoremap <CR> :noh<CR><CR>
 nnoremap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
@@ -79,6 +80,8 @@ nnoremap <leader>gb :Git branch<Space>
 nnoremap <leader>go :Git checkout<Space>
 nnoremap <leader>gps :Dispatch! git push<CR>
 nnoremap <leader>gpl :Dispatch! git pull<CR>
+noremap <Left> :diffget //2<CR>
+noremap <Right> :diffget //3<CR>
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -157,3 +160,4 @@ if has("gui_running")
     colorscheme tomorrow-night
     set guifont=InconsolataForPowerline:h11
 endif
+
