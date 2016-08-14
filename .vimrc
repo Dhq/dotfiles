@@ -17,6 +17,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'editorconfig/editorconfig-vim' "Matches current html tag
 Plug 'duggiefresh/vim-easydir' "Creates folder if not exists, new file
 Plug 'honza/vim-snippets' "Snippet lib
+Plug 'terryma/vim-multiple-cursors' 
 "Plug 'Valloric/YouCompleteMe' 
 Plug 'vim-scripts/BufOnly.vim' "Close all but current buffer
 "HTML/CSS
@@ -43,6 +44,8 @@ map <Space> <leader>
 nmap <leader>p :CtrlP<CR>
 nmap <leader>b :CtrlPBuffer<CR>
 map <leader>n :NERDTreeToggle<CR>
+" Find file in NT
+map <leader>j :NERDTreeFind<CR>
 nmap <S-Enter> O<Esc>
 "Indent whole file, move back to cursor pos
 nmap <F1> gg=G'' 
@@ -57,7 +60,6 @@ nnoremap <CR> :noh<CR><CR>
 nnoremap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
 nnoremap <C-q> :bdelete<CR>
-nmap  :NERDTreeFind<CR>
 let g:user_emmet_leader_key='<C-x>'
 
 "Fugitive key bindings
@@ -87,13 +89,21 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ag_working_path_mode="r"
-set wildignore+=*/.git/*,*/node_modules/*,*/.DS_Store,*/bin/*,*/obj/*
+set wildignore+=*/node_modules/*,*/.DS_Store,*/bin/*,*/obj/*
 set wildignore+=*.bmp,*.jpg,*.gif,*.jpeg,*.png,*.dll,*.exe,*.ico
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 let g:indent_guides_start_level = 2
 let g:used_javascript_libs = 'jQuery,angular,react'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let NERDTreeShowHidden=1
+let g:gitgutter_sign_column_always=1
 
 syntax enable " Enable syntax processing
 filetype plugin on
@@ -124,6 +134,7 @@ set vb t_vb= " No beeping or flickering on error
 set nobackup "no backup files
 set noswapfile
 set encoding=utf-8   
+set diffopt+=vertical
 "let g:syntastic_javascript_checkers = ['eslint']
 
 "Airline
