@@ -1,0 +1,23 @@
+e.=explorer .
+ls=ls --show-control-chars -F --color $*
+pwd=cd
+clear=cls
+history=cat %CMDER_ROOT%\config\.history
+unalias=alias /d $1
+ip=ipconfig /all
+..=cd ..
+rc=robocopy
+treesize="C:\Program Files (x86)\JAM Software\TreeSize Free\TreeSizeFree.exe"
+vim=gvim
+
+vimrc=gvim %homepath%/.vimrc
+
+gl=git log --oneline --all --graph --decorate  $*
+gs=git status
+
+fc=cd\
+fg=cd C:/Git
+
+fdo=cd C:/users/danhal/downloads
+fde=cd C:/users/danhal/desktop
+fp=cd "C:/Program Files (x86)"
