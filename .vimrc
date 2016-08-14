@@ -37,7 +37,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive' 
 "Other 
 Plug 'plasticboy/vim-markdown'
-Plug 'OrangeT/vim-csharp' 
+"Plug 'OrangeT/vim-csharp' 
 call plug#end()
 
 
@@ -52,7 +52,7 @@ nmap <S-Enter> O<Esc>
 nmap <F1> gg=G'' 
 nmap <F2> :BufOnly<CR>
 "" Remove surrounding tag
-nmap <F3> yitvatp
+nmap <F3> citvatp
 nmap <F4> :so $MYVIMRC<CR>
 nmap <F5> :set wrap linebreak nolist<CR>
 nmap <F11> <Plug>GitGutterPrevHunk
