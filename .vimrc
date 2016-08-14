@@ -20,6 +20,7 @@ Plug 'honza/vim-snippets' "Snippet lib
 Plug 'terryma/vim-multiple-cursors' 
 "Plug 'Valloric/YouCompleteMe' 
 Plug 'vim-scripts/BufOnly.vim' "Close all but current buffer
+Plug 'tpope/vim-dispatch' "Dispatch commands from within vim
 "HTML/CSS
 Plug 'mattn/emmet-vim' "Emmet
 Plug 'Rykka/colorv.vim'
@@ -37,7 +38,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive' 
 "Other 
 Plug 'plasticboy/vim-markdown'
-"Plug 'OrangeT/vim-csharp' 
+Plug 'OrangeT/vim-csharp' 
 call plug#end()
 
 
@@ -52,7 +53,7 @@ nmap <S-Enter> O<Esc>
 nmap <F1> gg=G'' 
 nmap <F2> :BufOnly<CR>
 "" Remove surrounding tag
-nmap <F3> citvatp
+nmap <F3> yitvatp
 nmap <F4> :so $MYVIMRC<CR>
 nmap <F5> :set wrap linebreak nolist<CR>
 nmap <F11> <Plug>GitGutterPrevHunk
@@ -157,3 +158,4 @@ if has("gui_running")
     colorscheme tomorrow-night
     set guifont=InconsolataForPowerline:h11
 endif
+
