@@ -56,8 +56,6 @@ nmap <F2> :BufOnly<CR>
 nmap <F3> yitvatp
 nmap <F4> :so $MYVIMRC<CR>
 nmap <F5> :set wrap linebreak nolist<CR>
-nmap <Up> <Plug>GitGutterPrevHunk
-nmap <Down> <Plug>GitGutterNextHunk
 nnoremap <CR> :noh<CR><CR>
 nnoremap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
@@ -80,6 +78,8 @@ nnoremap <leader>gb :Git branch<Space>
 nnoremap <leader>go :Git checkout<Space>
 nnoremap <leader>gps :Dispatch! git push<CR>
 nnoremap <leader>gpl :Dispatch! git pull<CR>
+nmap <Up> <Plug>GitGutterPrevHunk
+nmap <Down> <Plug>GitGutterNextHunk
 noremap <Left> :diffget //2<CR>
 noremap <Right> :diffget //3<CR>
 
