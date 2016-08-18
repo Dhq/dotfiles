@@ -110,7 +110,7 @@ set wildignore+=*.bmp,*.jpg,*.gif,*.jpeg,*.png,*.dll,*.exe,*.ico
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
+  \ 'link': 'some_bad_symbolic_links'
   \ }
 let g:indent_guides_start_level = 2
 let g:used_javascript_libs = 'jQuery,angular,react'
@@ -150,6 +150,8 @@ set noswapfile
 set encoding=utf-8   
 set diffopt+=vertical
 set cursorline
+set highlight+=N:DiffText " make current line number stand out a little
+set highlight+=c:LineNr  
 set relativenumber
 "let g:syntastic_javascript_checkers = ['eslint']
 
@@ -167,11 +169,9 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
-if has("gui_running")
-    set background=dark
-    colorscheme base16-ocean
-    set guifont=InconsolataForPowerline:h11
-endif 
+set background=dark
+colorscheme base16-ocean
+set guifont=Source\ Code\ Pro\ For\ Powerline\ Light:h11
 
 function! NumberToggle()
   if(&relativenumber == 1)
