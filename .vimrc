@@ -54,7 +54,7 @@ nmap <leader>b :CtrlPBuffer<CR>
 map <leader>n :NERDTreeToggle<CR>
 map <leader>r :rnu! nu?<CR>:
 " Find file in NT
-map <leader>j :NERDTreeFind<CR>
+map <leader>f :NERDTreeFind<CR>
 nmap <S-Enter> O<Esc>
 ""Indent whole file, move back to cursor pos
 nmap <F1> gg=G'' 
