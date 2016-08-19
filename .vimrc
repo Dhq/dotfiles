@@ -1,9 +1,11 @@
 silent! call plug#begin()
 "General
 Plug 'flazz/vim-colorschemes' 
+Plug 'chriskempson/base16-vim' 
 Plug 'nathanaelkane/vim-indent-guides' "highlight callback hells
 Plug 'jiangmiao/auto-pairs' "Add closing quote, bracket etc
 Plug 'scrooloose/syntastic' "Lintin
+Plug 'blueyed/vim-diminactive' "Dim inactive windows
 Plug 'scrooloose/nerdtree'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter' "Comment and uncoment code 
@@ -42,12 +44,17 @@ Plug 'OrangeT/vim-csharp'
 call plug#end()
 
 
+nmap Q q
+nnoremap K <nop>
+noremap Y y$
 map <Space> <leader>
+nnoremap <Leader><Leader> <C-^>
 nmap <leader>p :CtrlP<CR>
 nmap <leader>b :CtrlPBuffer<CR>
 map <leader>n :NERDTreeToggle<CR>
+map <leader>r :rnu! nu?<CR>:
 " Find file in NT
-map <leader>j :NERDTreeFind<CR>
+map <leader>f :NERDTreeFind<CR>
 nmap <S-Enter> O<Esc>
 ""Indent whole file, move back to cursor pos
 nmap <F1> gg=G'' 
@@ -59,8 +66,13 @@ nmap <F5> :set wrap linebreak nolist<CR>
 nnoremap <CR> :noh<CR><CR>
 nnoremap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
-nnoremap <C-q> :bdelete<CR>
+nnoremap <leader>q :bdelete<CR>
 let g:user_emmet_leader_key='<C-x>'
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 "Fugitive key bindings
 nnoremap <leader>ga :Git add %:p<CR><CR>
@@ -98,7 +110,7 @@ set wildignore+=*.bmp,*.jpg,*.gif,*.jpeg,*.png,*.dll,*.exe,*.ico
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn|bower_components|node_modules)$',
   \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
+  \ 'link': 'some_bad_symbolic_links'
   \ }
 let g:indent_guides_start_level = 2
 let g:used_javascript_libs = 'jQuery,angular,react'
@@ -106,8 +118,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let NERDTreeShowHidden=1
-let g:gitgutter_sign_column_always=1
-
+let g:gitgutter_sign_column_always=1 
 syntax enable " Enable syntax processing
 filetype plugin on
 runtime macros/matchit.vim "Needed to get matchit to work on html tags?
@@ -138,6 +149,10 @@ set nobackup "no backup files
 set noswapfile
 set encoding=utf-8   
 set diffopt+=vertical
+set cursorline
+set highlight+=N:DiffText " make current line number stand out a little
+set highlight+=c:LineNr  
+set relativenumber
 "let g:syntastic_javascript_checkers = ['eslint']
 
 "Airline
@@ -154,9 +169,16 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
-if has("gui_running")
-    set background=dark
-    colorscheme tomorrow-night
-    set guifont=InconsolataForPowerline:h11
-endif
+set background=dark
+colorscheme base16-ocean
+set guifont=Source\ Code\ Pro\ For\ Powerline\ Light:h11
 
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <leader>r :call NumberToggle()<cr>
