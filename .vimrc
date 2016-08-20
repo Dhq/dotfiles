@@ -19,7 +19,6 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'editorconfig/editorconfig-vim' "Matches current html tag
 Plug 'duggiefresh/vim-easydir' "Creates folder if not exists, new file
 Plug 'honza/vim-snippets' "Snippet lib
-Plug 'terryma/vim-multiple-cursors' 
 "Plug 'Valloric/YouCompleteMe' 
 Plug 'vim-scripts/BufOnly.vim' "Close all but current buffer
 Plug 'tpope/vim-dispatch' "Dispatch commands from within vim
@@ -103,7 +102,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:ackprg = 'ag --nogroup --nocolor --column'
+" let g:ack_prg = 'ag --nogroup --nocolor --column'
 let g:ag_working_path_mode="r"
 set wildignore+=*/node_modules/*,*/.DS_Store,*/bin/*,*/obj/*
 set wildignore+=*.bmp,*.jpg,*.gif,*.jpeg,*.png,*.dll,*.exe,*.ico
@@ -117,6 +116,7 @@ let g:used_javascript_libs = 'jQuery,angular,react'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:ag_prg='ag -S --nocolor --nogroup --column --ignore node_modules --ignore bower_components'
 let NERDTreeShowHidden=1
 let g:gitgutter_sign_column_always=1 
 syntax enable " Enable syntax processing
@@ -171,7 +171,7 @@ set guioptions-=L  "remove left-hand scroll bar
 
 set background=dark
 colorscheme base16-ocean
-set guifont=Source\ Code\ Pro\ For\ Powerline\ Light:h11
+set guifont=Sauce\ Code\ Powerline\ Light:h13
 
 function! NumberToggle()
   if(&relativenumber == 1)
