@@ -23,6 +23,7 @@ Plug 'mbbill/undotree'
 "Plug 'Valloric/YouCompleteMe' 
 Plug 'vim-scripts/BufOnly.vim' "Close all but current buffer
 Plug 'tpope/vim-dispatch' "Dispatch commands from within vim
+Plug 'wincent/loupe' "Better in-file searching 
 "HTML/CSS
 Plug 'mattn/emmet-vim' "Emmet
 Plug 'Rykka/colorv.vim'
