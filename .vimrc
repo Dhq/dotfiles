@@ -176,7 +176,12 @@ set guioptions-=L  "remove left-hand scroll bar
 
 set background=dark
 colorscheme base16-ocean
-set guifont=Sauce\ Code\ Powerline\ Light:h15 
+
+if has('mac')
+    set guifont=Sauce\ Code\ Powerline\ Light:h15 
+elseif has('win32') || has('win64')
+    set guifont=Source_Code_Pro_Light:h11
+endif
 
 function! ToggleColorscheme()
     if (g:colors_name == "base16-ocean")
