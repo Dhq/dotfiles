@@ -150,7 +150,7 @@ set incsearch " Search while you enter the query, not after
 set undolevels=1000 " More undos
 set title " Vim can set the title of the terminal window
 set t_Co=256 " Tell vim that your terminal supports 256 colors
-set vb t_vb= " No beeping or flickering on error
+set visualbell t_vb= " No beeping or flickering on error
 set nobackup "no backup files
 set noswapfile
 set encoding=utf-8   
