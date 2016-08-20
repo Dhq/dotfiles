@@ -44,8 +44,10 @@ Plug 'plasticboy/vim-markdown'
 Plug 'OrangeT/vim-csharp' 
 call plug#end()
 
+
 "--- Standard mappings 
 map <Space> <leader>
+nnoremap <leader><tab> <C-^>
 nmap Q q
 nnoremap K <nop>
 noremap Y y$
@@ -74,6 +76,7 @@ map <leader>ow :only<CR>
 map <leader>ob :BufOnly<CR>
 map <leader>dg :diffget<CR>
 map <leader>dp :diffput<CR>
+nnoremap <silent> <Leader>r :call CycleNumbers ()<CR>
 nnoremap <leader>q :bdelete<CR>
 noremap <leader><Left> :diffget //2<CR>
 noremap <leader><Right> :diffget //3<CR>
@@ -185,10 +188,25 @@ elseif has('win32') || has('win64')
     let g:NERDTreeCopyCmd= 'cp -r' "To be able to copy with NerdTree on Win
 endif
 
+" --- Functions
 function! ToggleColorscheme()
     if (g:colors_name == "base16-ocean")
       colors tomorrow-night
     else
       colors base16-ocean
     endif
+endfunction
+
+" Cycle through relativenumber + number, number (only), and no numbering.
+function! CycleNumbers() abort
+  if exists('+relativenumber')
+    execute {
+          \ '00': 'set relativenumber   | set number',
+          \ '01': 'set norelativenumber | set number',
+          \ '10': 'set norelativenumber | set nonumber',
+          \ '11': 'set norelativenumber | set number' }[&number . &relativenumber]
+  else
+    " No relative numbering, just toggle numbers on and off.
+    set number!<CR>
+  endif
 endfunction
