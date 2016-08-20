@@ -19,6 +19,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'editorconfig/editorconfig-vim' "Matches current html tag
 Plug 'duggiefresh/vim-easydir' "Creates folder if not exists, new file
 Plug 'honza/vim-snippets' "Snippet lib
+Plug 'mbbill/undotree' 
 "Plug 'Valloric/YouCompleteMe' 
 Plug 'vim-scripts/BufOnly.vim' "Close all but current buffer
 Plug 'tpope/vim-dispatch' "Dispatch commands from within vim
@@ -42,38 +43,48 @@ Plug 'plasticboy/vim-markdown'
 Plug 'OrangeT/vim-csharp' 
 call plug#end()
 
-
+"--- Standard mappings 
+map <Space> <leader>
 nmap Q q
 nnoremap K <nop>
 noremap Y y$
-map <Space> <leader>
-nnoremap <Leader><Leader> <C-^>
-nmap <leader>p :CtrlP<CR>
-nmap <leader>b :CtrlPBuffer<CR>
-map <leader>n :NERDTreeToggle<CR>
-map <leader>r :rnu! nu?<CR>:
-" Find file in NT
-map <leader>f :NERDTreeFind<CR>
 nmap <S-Enter> O<Esc>
-""Indent whole file, move back to cursor pos
-nmap <F1> gg=G'' 
-nmap <F2> :BufOnly<CR>
-"" Remove surrounding tag
-nmap <F3> yitvatp
-nmap <F4> :so $MYVIMRC<CR>
-nmap <F5> :set wrap linebreak nolist<CR>
-nnoremap <CR> :noh<CR><CR>
-nnoremap <C-n> :bnext<CR>
-nmap <C-p> :bprev<CR>
-nnoremap <leader>q :bdelete<CR>
-let g:user_emmet_leader_key='<C-x>'
-
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+nnoremap <C-n> :cn<CR>
+nnoremap <C-p> :cN<CR>
+nmap <Up> <Plug>GitGutterPrevHunk
+nmap <Down> <Plug>GitGutterNextHunk
+nnoremap <Left> :bprev<CR>
+nnoremap <Right> :bnext<CR>
+nnoremap <CR> :noh<CR><CR>
+let g:user_emmet_leader_key='<C-Z>'
 
-"Fugitive key bindings
+" --- Leader mappings ---
+nmap <leader><leader> <C-^>
+map <leader>a :Ag 
+map <leader>f :NERDTreeFind<CR>
+nmap <leader>p :CtrlP<CR>
+nmap <leader>b :CtrlPBuffer<CR>
+map <leader>n :NERDTreeToggle<CR>
+map <leader>ow :only<CR>
+map <leader>ob :BufOnly<CR>
+map <leader>dg :diffget<CR>
+map <leader>dp :diffput<CR>
+nnoremap <leader>q :bdelete<CR>
+noremap <leader><Left> :diffget //2<CR>
+noremap <leader><Right> :diffget //3<CR>
+
+"--- Function mappings ---
+nmap <F1> gg=G'' 
+nmap <F3> yitvatp
+nmap <F4> :so $MYVIMRC<CR>
+nmap <F5> :set wrap linebreak nolist<CR>
+nmap <F12> :call ToggleColorscheme()<CR>
+
+"--- Fugitive bindings ---
 nnoremap <leader>ga :Git add %:p<CR><CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gc :Gcommit -v -q<CR>
@@ -89,10 +100,6 @@ nnoremap <leader>gb :Git branch<Space>
 nnoremap <leader>go :Git checkout<Space>
 nnoremap <leader>gps :Dispatch! git push<CR>
 nnoremap <leader>gpl :Dispatch! git pull<CR>
-nmap <Up> <Plug>GitGutterPrevHunk
-nmap <Down> <Plug>GitGutterNextHunk
-noremap <Left> :diffget //2<CR>
-noremap <Right> :diffget //3<CR>
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -100,9 +107,9 @@ set statusline+=%*
 "let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-" let g:ack_prg = 'ag --nogroup --nocolor --column'
+let g:syntastic_check_on_w = 0
 let g:ag_working_path_mode="r"
 set wildignore+=*/node_modules/*,*/.DS_Store,*/bin/*,*/obj/*
 set wildignore+=*.bmp,*.jpg,*.gif,*.jpeg,*.png,*.dll,*.exe,*.ico
@@ -143,7 +150,6 @@ set incsearch " Search while you enter the query, not after
 set undolevels=1000 " More undos
 set title " Vim can set the title of the terminal window
 set t_Co=256 " Tell vim that your terminal supports 256 colors
-set number " Line numbers
 set vb t_vb= " No beeping or flickering on error
 set nobackup "no backup files
 set noswapfile
@@ -153,7 +159,6 @@ set cursorline
 set highlight+=N:DiffText " make current line number stand out a little
 set highlight+=c:LineNr  
 set relativenumber
-"let g:syntastic_javascript_checkers = ['eslint']
 
 "Airline
 set laststatus=2 " vim-airline always show
@@ -163,7 +168,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 "Gvim settings
 set lines=10000 columns=10000 "Start gvim maximized
-au GUIEnter * simalt ~x
+"au GUIEnter * simalt ~x
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
@@ -171,14 +176,12 @@ set guioptions-=L  "remove left-hand scroll bar
 
 set background=dark
 colorscheme base16-ocean
-set guifont=Sauce\ Code\ Powerline\ Light:h13
+set guifont=Sauce\ Code\ Powerline\ Light:h15 
 
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set number
-  else
-    set relativenumber
-  endif
-endfunc
-
-nnoremap <leader>r :call NumberToggle()<cr>
+function! ToggleColorscheme()
+    if (g:colors_name == "base16-ocean")
+      colors tomorrow-night
+    else
+      colors base16-ocean
+    endif
+endfunction
