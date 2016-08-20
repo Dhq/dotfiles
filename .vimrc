@@ -1,9 +1,11 @@
 silent! call plug#begin()
 "General
 Plug 'flazz/vim-colorschemes' 
+Plug 'chriskempson/base16-vim' 
 Plug 'nathanaelkane/vim-indent-guides' "highlight callback hells
 Plug 'jiangmiao/auto-pairs' "Add closing quote, bracket etc
 Plug 'scrooloose/syntastic' "Lintin
+Plug 'blueyed/vim-diminactive' "Dim inactive windows
 Plug 'scrooloose/nerdtree'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter' "Comment and uncoment code 
@@ -17,7 +19,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'editorconfig/editorconfig-vim' "Matches current html tag
 Plug 'duggiefresh/vim-easydir' "Creates folder if not exists, new file
 Plug 'honza/vim-snippets' "Snippet lib
-Plug 'terryma/vim-multiple-cursors' 
+Plug 'mbbill/undotree' 
 "Plug 'Valloric/YouCompleteMe' 
 Plug 'vim-scripts/BufOnly.vim' "Close all but current buffer
 Plug 'tpope/vim-dispatch' "Dispatch commands from within vim
@@ -41,30 +43,48 @@ Plug 'plasticboy/vim-markdown'
 Plug 'OrangeT/vim-csharp' 
 call plug#end()
 
-
+"--- Standard mappings 
 map <Space> <leader>
+nmap Q q
+nnoremap K <nop>
+noremap Y y$
+nmap <S-Enter> O<Esc>
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-n> :cn<CR>
+nnoremap <C-p> :cN<CR>
+nmap <Up> <Plug>GitGutterPrevHunk
+nmap <Down> <Plug>GitGutterNextHunk
+nnoremap <Left> :bprev<CR>
+nnoremap <Right> :bnext<CR>
+nnoremap <CR> :noh<CR><CR>
+let g:user_emmet_leader_key='<C-Z>'
+
+" --- Leader mappings ---
+nmap <leader><leader> <C-^>
+map <leader>a :Ag 
+map <leader>f :NERDTreeFind<CR>
 nmap <leader>p :CtrlP<CR>
 nmap <leader>b :CtrlPBuffer<CR>
 map <leader>n :NERDTreeToggle<CR>
-" Find file in NT
-map <leader>j :NERDTreeFind<CR>
-nmap <S-Enter> O<Esc>
-""Indent whole file, move back to cursor pos
+map <leader>ow :only<CR>
+map <leader>ob :BufOnly<CR>
+map <leader>dg :diffget<CR>
+map <leader>dp :diffput<CR>
+nnoremap <leader>q :bdelete<CR>
+noremap <leader><Left> :diffget //2<CR>
+noremap <leader><Right> :diffget //3<CR>
+
+"--- Function mappings ---
 nmap <F1> gg=G'' 
-nmap <F2> :BufOnly<CR>
-"" Remove surrounding tag
 nmap <F3> yitvatp
 nmap <F4> :so $MYVIMRC<CR>
 nmap <F5> :set wrap linebreak nolist<CR>
-nmap <Up> <Plug>GitGutterPrevHunk
-nmap <Down> <Plug>GitGutterNextHunk
-nnoremap <CR> :noh<CR><CR>
-nnoremap <C-n> :bnext<CR>
-nmap <C-p> :bprev<CR>
-nnoremap <C-q> :bdelete<CR>
-let g:user_emmet_leader_key='<C-x>'
+nmap <F12> :call ToggleColorscheme()<CR>
 
-"Fugitive key bindings
+"--- Fugitive bindings ---
 nnoremap <leader>ga :Git add %:p<CR><CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gc :Gcommit -v -q<CR>
@@ -80,8 +100,6 @@ nnoremap <leader>gb :Git branch<Space>
 nnoremap <leader>go :Git checkout<Space>
 nnoremap <leader>gps :Dispatch! git push<CR>
 nnoremap <leader>gpl :Dispatch! git pull<CR>
-noremap <Left> :diffget //2<CR>
-noremap <Right> :diffget //3<CR>
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -89,26 +107,25 @@ set statusline+=%*
 "let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-let g:ackprg = 'ag --nogroup --nocolor --column'
+let g:syntastic_check_on_w = 0
 let g:ag_working_path_mode="r"
 set wildignore+=*/node_modules/*,*/.DS_Store,*/bin/*,*/obj/*
 set wildignore+=*.bmp,*.jpg,*.gif,*.jpeg,*.png,*.dll,*.exe,*.ico
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
+  \ 'link': 'some_bad_symbolic_links'
   \ }
 let g:indent_guides_start_level = 2
 let g:used_javascript_libs = 'jQuery,angular,react'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:ag_prg='ag -S --nocolor --nogroup --column --ignore node_modules --ignore bower_components'
 let NERDTreeShowHidden=1
-let g:gitgutter_sign_column_always=1
-
+let g:gitgutter_sign_column_always=1 
 syntax enable " Enable syntax processing
 filetype plugin on
 runtime macros/matchit.vim "Needed to get matchit to work on html tags?
@@ -133,13 +150,15 @@ set incsearch " Search while you enter the query, not after
 set undolevels=1000 " More undos
 set title " Vim can set the title of the terminal window
 set t_Co=256 " Tell vim that your terminal supports 256 colors
-set number " Line numbers
 set vb t_vb= " No beeping or flickering on error
 set nobackup "no backup files
 set noswapfile
 set encoding=utf-8   
 set diffopt+=vertical
-"let g:syntastic_javascript_checkers = ['eslint']
+set cursorline
+set highlight+=N:DiffText " make current line number stand out a little
+set highlight+=c:LineNr  
+set relativenumber
 
 "Airline
 set laststatus=2 " vim-airline always show
@@ -149,15 +168,20 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 "Gvim settings
 set lines=10000 columns=10000 "Start gvim maximized
-au GUIEnter * simalt ~x
+"au GUIEnter * simalt ~x
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
-if has("gui_running")
-    set background=dark
-    colorscheme tomorrow-night
-    set guifont=InconsolataForPowerline:h11
-endif
+set background=dark
+colorscheme base16-ocean
+set guifont=Sauce\ Code\ Powerline\ Light:h15 
 
+function! ToggleColorscheme()
+    if (g:colors_name == "base16-ocean")
+      colors tomorrow-night
+    else
+      colors base16-ocean
+    endif
+endfunction
