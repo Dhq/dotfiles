@@ -168,7 +168,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 "Gvim settings
 set lines=10000 columns=10000 "Start gvim maximized
-"au GUIEnter * simalt ~x
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
@@ -180,7 +179,9 @@ colorscheme base16-ocean
 if has('mac')
     set guifont=Sauce\ Code\ Powerline\ Light:h15 
 elseif has('win32') || has('win64')
-    set guifont=Source_Code_Pro_Light:h11
+    au GUIEnter * simalt ~x "Start maximized
+    set guifont=Consolas:h11
+    let g:NERDTreeCopyCmd= 'cp -r' "To be able to copy with NerdTree on Win
 endif
 
 function! ToggleColorscheme()
