@@ -31,6 +31,7 @@ Plug 'ap/vim-css-color' "Color preview in css
 Plug 'tpope/vim-ragtag' "Faster creating of tags
 Plug 'gregsexton/MatchTag' "Matches current html tag
 Plug 'groenewege/vim-less' 
+Plug 'alvan/vim-closetag' 
 "JS
 Plug 'mxw/vim-jsx'
 Plug 'othree/yajs.vim', { 'for': 'javascript' } "Js syntax
@@ -82,6 +83,8 @@ nmap <F1> gg=G''
 nmap <F3> yitvatp
 nmap <F4> :so $MYVIMRC<CR>
 nmap <F5> :set wrap linebreak nolist<CR>
+noremap <silent> <F11> :let @+=expand("%:p")<CR>
+C:\Git\dotfiles\.vimrc
 nmap <F12> :call ToggleColorscheme()<CR>
 
 "--- Fugitive bindings ---
