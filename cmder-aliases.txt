@@ -21,6 +21,6 @@ fc=cd\
 fg=cd C:/Git
 fp=cd "C:/Program Files (x86)"
 
-ea=gvim C:\cmder\config\aliases
+ea=gvim %CMDER_ROOT%\config\aliases
 ev=gvim %HOMEPATH%\.vimrc
 eh=gvim C:\Windows\System32\drivers\etc\hosts 
