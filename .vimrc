@@ -176,15 +176,15 @@ set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
 
+colorscheme base16-ocean
 if has('mac')
-    colorscheme base16-ocean
     set highlight+=N:DiffText " make current line number stand out a little
     set highlight+=c:LineNr  
     set guifont=Sauce\ Code\ Powerline\ Light:h15 
 elseif has('win32') || has('win64')
-    colorscheme tomorrow-night
+"    colorscheme tomorrow-night
     au GUIEnter * simalt ~x "Start maximized
-    set guifont=Consolas:h11
+    set guifont=Powerline_Consolas:h11
     let g:NERDTreeCopyCmd= 'cp -r' "To be able to copy with NerdTree on Win
 endif
 
