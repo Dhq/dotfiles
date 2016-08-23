@@ -76,6 +76,8 @@ map <leader>ow :only<CR>
 map <leader>ob :BufOnly<CR>
 map <leader>dg :diffget<CR>
 map <leader>dp :diffput<CR>
+map <leader>w :w<CR>
+map <leader>x :ccl<CR>
 nnoremap <silent> <Leader>r :call CycleNumbers ()<CR>
 nnoremap <leader>q :bdelete<CR>
 noremap <leader><Left> :diffget //2<CR>
