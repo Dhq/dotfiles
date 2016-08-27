@@ -50,6 +50,7 @@ call plug#end()
 map <Space> <leader>
 nnoremap <leader><tab> <C-^>
 nmap Q q
+nmap W w
 nnoremap K <nop>
 noremap Y y$
 nmap <S-Enter> O<Esc>
@@ -70,13 +71,15 @@ let g:user_emmet_leader_key='<C-Z>'
 nmap <leader><leader> <C-^>
 map <leader>a :Ag 
 map <leader>f :NERDTreeFind<CR>
-nmap <leader>p :CtrlP<CR>
+let g:ctrlp_map = '<leader>p'
 nmap <leader>b :CtrlPBuffer<CR>
 map <leader>n :NERDTreeToggle<CR>
 map <leader>ow :only<CR>
 map <leader>ob :BufOnly<CR>
 map <leader>dg :diffget<CR>
 map <leader>dp :diffput<CR>
+map <leader>w :w<CR>
+map <leader>x :ccl<CR>
 nnoremap <silent> <Leader>r :call CycleNumbers ()<CR>
 nnoremap <leader>q :bdelete<CR>
 noremap <leader><Left> :diffget //2<CR>
@@ -84,12 +87,14 @@ noremap <leader><Right> :diffget //3<CR>
 
 "--- Function mappings ---
 nmap <F1> gg=G'' 
+inoremap <F2> <c-o>:w<cr>
 nmap <F3> yitvatp
 nmap <F4> :so $MYVIMRC<CR>
 nmap <F5> :set wrap linebreak nolist<CR>
 nmap <F12> :call ToggleColorscheme()<CR>
 
 "--- Fugitive bindings ---
+
 nnoremap <leader>ga :Git add %:p<CR><CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gc :Gcommit -v -q<CR>
@@ -116,10 +121,10 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_check_on_w = 0
 let g:ag_working_path_mode="r"
-set wildignore+=*/node_modules/*,*/.DS_Store,*/bin/*,*/obj/*
+set wildignore+=*/node_modules/*,*/.DS_Store,*/bin/*,*/obj/*,*/bower_components/*
 set wildignore+=*.bmp,*.jpg,*.gif,*.jpeg,*.png,*.dll,*.exe,*.ico
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'dir':  '\v[\/]\.(git|hg|svn|bower_components|node_modules)$',
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links'
   \ }
@@ -177,15 +182,15 @@ set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
 
+colorscheme base16-ocean
 if has('mac')
-    colorscheme base16-ocean
     set highlight+=N:DiffText " make current line number stand out a little
     set highlight+=c:LineNr  
     set guifont=Sauce\ Code\ Powerline\ Light:h15 
 elseif has('win32') || has('win64')
-    colorscheme tomorrow-night
+    au GuiEnter * set visualbell t_vb= "No bells or flickering on error
     au GUIEnter * simalt ~x "Start maximized
-    set guifont=Consolas:h11
+    set guifont=Powerline_Consolas:h11
     let g:NERDTreeCopyCmd= 'cp -r' "To be able to copy with NerdTree on Win
 endif
 
