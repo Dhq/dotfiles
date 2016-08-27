@@ -28,6 +28,7 @@ Plug 'wincent/loupe' "Better in-file searching
 Plug 'mattn/emmet-vim' "Emmet
 Plug 'Rykka/colorv.vim'
 Plug 'othree/html5.vim'
+Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color' "Color preview in css
 Plug 'tpope/vim-ragtag' "Faster creating of tags
 Plug 'gregsexton/MatchTag' "Matches current html tag
