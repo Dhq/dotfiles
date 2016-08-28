@@ -36,6 +36,8 @@ Plug 'alvan/vim-closetag'
 Plug 'mxw/vim-jsx'
 Plug 'othree/yajs.vim', { 'for': 'javascript' } "Js syntax
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
+"Elm
+Plug 'lambdatoast/elm.vim'
 "Git
 Plug 'airblade/vim-gitgutter' 
 Plug 'tpope/vim-fugitive' 
@@ -71,6 +73,7 @@ nmap <leader>p :CtrlP<CR>
 nmap <leader>b :CtrlPBuffer<CR>
 map <leader>n :NERDTreeToggle<CR>
 map <leader>ow :only<CR>
+map <leader> :w<CR>
 map <leader>ob :BufOnly<CR>
 map <leader>dg :diffget<CR>
 map <leader>dp :diffput<CR>
@@ -84,7 +87,6 @@ nmap <F3> yitvatp
 nmap <F4> :so $MYVIMRC<CR>
 nmap <F5> :set wrap linebreak nolist<CR>
 noremap <silent> <F11> :let @+=expand("%:p")<CR>
-C:\Git\dotfiles\.vimrc
 nmap <F12> :call ToggleColorscheme()<CR>
 
 "--- Fugitive bindings ---
@@ -107,7 +109,7 @@ nnoremap <leader>gpl :Dispatch! git pull<CR>
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-"let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
