@@ -78,6 +78,8 @@ map <leader>ow :only<CR>
 map <leader>ob :BufOnly<CR>
 map <leader>dg :diffget<CR>
 map <leader>dp :diffput<CR>
+nmap <leader>sl :s/<c-r>=expand("<cword>")<cr>//g<Left><Left>
+nmap <leader>sf :%s/<c-r>=expand("<cword>")<cr>//g<Left><Left>
 map <leader>w :w<CR>
 map <leader>x :ccl<CR>
 nnoremap <silent> <Leader>r :call CycleNumbers ()<CR>
