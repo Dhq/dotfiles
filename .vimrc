@@ -66,6 +66,8 @@ nnoremap <Left> :bprev<CR>
 nnoremap <Right> :bnext<CR>
 nnoremap <CR> :noh<CR><CR>
 let g:user_emmet_leader_key='<C-Z>'
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
 
 " --- Leader mappings ---
 nmap <leader><leader> <C-^>
@@ -83,7 +85,7 @@ nmap <leader>sf :%s/<c-r>=expand("<cword>")<cr>//g<Left><Left>
 map <leader>w :w<CR>
 map <leader>x :ccl<CR>
 nnoremap <silent> <Leader>r :call CycleNumbers ()<CR>
-nnoremap <leader>q :bdelete<CR>
+nnoremap <leader>q :bp\|bd #<CR>
 noremap <leader><Left> :diffget //2<CR>
 noremap <leader><Right> :diffget //3<CR>
 
@@ -96,7 +98,6 @@ nmap <F5> :set wrap linebreak nolist<CR>
 nmap <F12> :call ToggleColorscheme()<CR>
 
 "--- Fugitive bindings ---
-
 nnoremap <leader>ga :Git add %:p<CR><CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gc :Gcommit -v -q<CR>
