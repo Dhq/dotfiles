@@ -23,10 +23,12 @@ Plug 'mbbill/undotree'
 "Plug 'Valloric/YouCompleteMe' 
 Plug 'vim-scripts/BufOnly.vim' "Close all but current buffer
 Plug 'tpope/vim-dispatch' "Dispatch commands from within vim
+Plug 'wincent/loupe' "Better in-file searching 
 "HTML/CSS
 Plug 'mattn/emmet-vim' "Emmet
 Plug 'Rykka/colorv.vim'
 Plug 'othree/html5.vim'
+Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color' "Color preview in css
 Plug 'tpope/vim-ragtag' "Faster creating of tags
 Plug 'gregsexton/MatchTag' "Matches current html tag
@@ -46,9 +48,12 @@ Plug 'plasticboy/vim-markdown'
 Plug 'OrangeT/vim-csharp' 
 call plug#end()
 
+
 "--- Standard mappings 
 map <Space> <leader>
+nnoremap <leader><tab> <C-^>
 nmap Q q
+nmap W w
 nnoremap K <nop>
 noremap Y y$
 nmap <S-Enter> O<Esc>
@@ -64,12 +69,14 @@ nnoremap <Left> :bprev<CR>
 nnoremap <Right> :bnext<CR>
 nnoremap <CR> :noh<CR><CR>
 let g:user_emmet_leader_key='<C-Z>'
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
 
 " --- Leader mappings ---
 nmap <leader><leader> <C-^>
 map <leader>a :Ag 
 map <leader>f :NERDTreeFind<CR>
-nmap <leader>p :CtrlP<CR>
+let g:ctrlp_map = '<leader>p'
 nmap <leader>b :CtrlPBuffer<CR>
 map <leader>n :NERDTreeToggle<CR>
 map <leader>ow :only<CR>
@@ -77,12 +84,18 @@ map <leader> :w<CR>
 map <leader>ob :BufOnly<CR>
 map <leader>dg :diffget<CR>
 map <leader>dp :diffput<CR>
-nnoremap <leader>q :bdelete<CR>
+nmap <leader>sl :s/<c-r>=expand("<cword>")<cr>//g<Left><Left>
+nmap <leader>sf :%s/<c-r>=expand("<cword>")<cr>//g<Left><Left>
+map <leader>w :w<CR>
+map <leader>x :ccl<CR>
+nnoremap <silent> <Leader>r :call CycleNumbers ()<CR>
+nnoremap <leader>q :bp\|bd #<CR>
 noremap <leader><Left> :diffget //2<CR>
 noremap <leader><Right> :diffget //3<CR>
 
 "--- Function mappings ---
 nmap <F1> gg=G'' 
+inoremap <F2> <c-o>:w<cr>
 nmap <F3> yitvatp
 nmap <F4> :so $MYVIMRC<CR>
 nmap <F5> :set wrap linebreak nolist<CR>
@@ -116,10 +129,10 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_check_on_w = 0
 let g:ag_working_path_mode="r"
-set wildignore+=*/node_modules/*,*/.DS_Store,*/bin/*,*/obj/*
+set wildignore+=*/node_modules/*,*/.DS_Store,*/bin/*,*/obj/*,*/bower_components/*
 set wildignore+=*.bmp,*.jpg,*.gif,*.jpeg,*.png,*.dll,*.exe,*.ico
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'dir':  '\v[\/]\.(git|hg|svn|bower_components|node_modules)$',
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links'
   \ }
@@ -177,22 +190,37 @@ set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
 
+colorscheme base16-ocean
 if has('mac')
-    colorscheme base16-ocean
     set highlight+=N:DiffText " make current line number stand out a little
     set highlight+=c:LineNr  
     set guifont=Sauce\ Code\ Powerline\ Light:h15 
 elseif has('win32') || has('win64')
-    colorscheme tomorrow-night
+    au GuiEnter * set visualbell t_vb= "No bells or flickering on error
     au GUIEnter * simalt ~x "Start maximized
-    set guifont=Consolas:h11
+    set guifont=Powerline_Consolas:h11
     let g:NERDTreeCopyCmd= 'cp -r' "To be able to copy with NerdTree on Win
 endif
 
+" --- Functions
 function! ToggleColorscheme()
     if (g:colors_name == "base16-ocean")
       colors tomorrow-night
     else
       colors base16-ocean
     endif
+endfunction
+
+" Cycle through relativenumber + number, number (only), and no numbering.
+function! CycleNumbers() abort
+  if exists('+relativenumber')
+    execute {
+          \ '00': 'set relativenumber   | set number',
+          \ '01': 'set norelativenumber | set number',
+          \ '10': 'set norelativenumber | set nonumber',
+          \ '11': 'set norelativenumber | set number' }[&number . &relativenumber]
+  else
+    " No relative numbering, just toggle numbers on and off.
+    set number!<CR>
+  endif
 endfunction
