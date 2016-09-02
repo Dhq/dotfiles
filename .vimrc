@@ -4,7 +4,7 @@ Plug 'flazz/vim-colorschemes'
 Plug 'chriskempson/base16-vim' 
 Plug 'nathanaelkane/vim-indent-guides' "highlight callback hells
 Plug 'jiangmiao/auto-pairs' "Add closing quote, bracket etc
-Plug 'scrooloose/syntastic' "Lintin
+"Plug 'scrooloose/syntastic' "Lintin
 Plug 'blueyed/vim-diminactive' "Dim inactive windows
 Plug 'scrooloose/nerdtree'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
@@ -24,6 +24,8 @@ Plug 'mbbill/undotree'
 Plug 'vim-scripts/BufOnly.vim' "Close all but current buffer
 Plug 'tpope/vim-dispatch' "Dispatch commands from within vim
 Plug 'wincent/loupe' "Better in-file searching 
+Plug 'honza/vim-snippets' 
+Plug 'SirVer/ultisnips' 
 "HTML/CSS
 Plug 'mattn/emmet-vim' "Emmet
 Plug 'Rykka/colorv.vim'
@@ -71,6 +73,9 @@ nnoremap <CR> :noh<CR><CR>
 let g:user_emmet_leader_key='<C-Z>'
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
+nnoremap <c-s> :w<CR> 
+inoremap <c-s> <c-o>:w<cr>
+vnoremap <c-s> <Esc>:w<CR> 
 
 " --- Leader mappings ---
 nmap <leader><leader> <C-^>
@@ -139,8 +144,8 @@ let g:ctrlp_custom_ignore = {
 let g:indent_guides_start_level = 2
 let g:used_javascript_libs = 'jQuery,angular,react'
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 let g:ag_prg='ag -S --nocolor --nogroup --column --ignore node_modules --ignore bower_components'
 let NERDTreeShowHidden=1
 let g:gitgutter_sign_column_always=1 
