@@ -180,6 +180,8 @@ set encoding=utf-8
 set diffopt+=vertical
 set cursorline
 set relativenumber
+set guicursor=
+
 
 "Airline
 set laststatus=2 " vim-airline always show
