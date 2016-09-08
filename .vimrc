@@ -2,7 +2,6 @@ silent! call plug#begin()
 "General
 Plug 'flazz/vim-colorschemes' 
 Plug 'chriskempson/base16-vim' 
-Plug 'nathanaelkane/vim-indent-guides' "highlight callback hells
 Plug 'jiangmiao/auto-pairs' "Add closing quote, bracket etc
 Plug 'scrooloose/syntastic' "Lintin
 Plug 'blueyed/vim-diminactive' "Dim inactive windows
@@ -20,6 +19,8 @@ Plug 'editorconfig/editorconfig-vim' "Matches current html tag
 Plug 'duggiefresh/vim-easydir' "Creates folder if not exists, new file
 Plug 'honza/vim-snippets' "Snippet lib
 Plug 'mbbill/undotree' 
+Plug 'SirVer/ultisnips' 
+Plug 'honza/vim-snippets' 
 "Plug 'Valloric/YouCompleteMe' 
 Plug 'vim-scripts/BufOnly.vim' "Close all but current buffer
 Plug 'tpope/vim-dispatch' "Dispatch commands from within vim
@@ -44,7 +45,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'plasticboy/vim-markdown'
 Plug 'OrangeT/vim-csharp' 
 call plug#end()
-
 
 "--- Standard mappings 
 map <Space> <leader>
@@ -86,7 +86,6 @@ nnoremap <silent> <Leader>r :call CycleNumbers ()<CR>
 nnoremap <leader>q :bdelete<CR>
 noremap <leader><Left> :diffget //2<CR>
 noremap <leader><Right> :diffget //3<CR>
-
 "--- Function mappings ---
 nmap <F1> gg=G'' 
 inoremap <F2> <c-o>:w<cr>
@@ -132,15 +131,18 @@ let g:ctrlp_custom_ignore = {
   \ }
 let g:indent_guides_start_level = 2
 let g:used_javascript_libs = 'jQuery,angular,react'
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+ " Trigger configuration. Do not use <tab> if you use YouCompleteMe
+let g:UltiSnipsExpandTrigger = '<Tab>'
+let g:UltiSnipsJumpForwardTrigger = '<Tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 let g:ag_prg='ag -S --nocolor --nogroup --column --ignore node_modules --ignore bower_components'
 let NERDTreeShowHidden=1
 let g:gitgutter_sign_column_always=1 
 syntax enable " Enable syntax processing
 filetype plugin on
 runtime macros/matchit.vim "Needed to get matchit to work on html tags?
+
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 set nocompatible
 set hidden
@@ -173,6 +175,8 @@ set relativenumber
 "Airline
 set laststatus=2 " vim-airline always show
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 
