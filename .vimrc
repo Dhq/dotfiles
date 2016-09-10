@@ -3,7 +3,7 @@ silent! call plug#begin()
 Plug 'flazz/vim-colorschemes' 
 Plug 'chriskempson/base16-vim' 
 Plug 'jiangmiao/auto-pairs' "Add closing quote, bracket etc
-Plug 'scrooloose/syntastic' "Lintin
+"Plug 'scrooloose/syntastic' "Lintin
 Plug 'blueyed/vim-diminactive' "Dim inactive windows
 Plug 'scrooloose/nerdtree'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
@@ -30,6 +30,8 @@ Plug 'vim-scripts/BufOnly.vim' "Close all but current buffer
 Plug 'tpope/vim-dispatch' "Dispatch commands from within vim
 Plug 'wincent/loupe' "Better in-file searching 
 Plug 'christoomey/vim-system-copy' 
+Plug 'honza/vim-snippets' 
+Plug 'SirVer/ultisnips' 
 "HTML/CSS
 Plug 'mattn/emmet-vim' "Emmet
 Plug 'Rykka/colorv.vim'
@@ -39,10 +41,13 @@ Plug 'ap/vim-css-color' "Color preview in css
 Plug 'tpope/vim-ragtag' "Faster creating of tags
 Plug 'gregsexton/MatchTag' "Matches current html tag
 Plug 'groenewege/vim-less' 
+Plug 'alvan/vim-closetag' 
 "JS
 Plug 'mxw/vim-jsx'
 Plug 'othree/yajs.vim', { 'for': 'javascript' } "Js syntax
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
+"Elm
+Plug 'lambdatoast/elm.vim'
 "Git
 Plug 'airblade/vim-gitgutter' 
 Plug 'tpope/vim-fugitive' 
@@ -71,7 +76,11 @@ nnoremap <Left> :bprev<CR>
 nnoremap <Right> :bnext<CR>
 nnoremap <CR> :noh<CR><CR>
 let g:user_emmet_leader_key='<C-Z>'
-cabbr %% <C-R>=expand(':echo pwd')<CR>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+nnoremap <c-s> :w<CR> 
+inoremap <c-s> <c-o>:w<cr>
+vnoremap <c-s> <Esc>:w<CR> 
 
 " --- Leader mappings ---
 nmap <leader><leader> <C-^>
@@ -82,6 +91,7 @@ let g:ctrlp_map = '<leader>p'
 nmap <leader>b :CtrlPBuffer<CR>
 map <leader>n :NERDTreeToggle<CR>
 map <leader>ow :only<CR>
+map <leader> :w<CR>
 map <leader>ob :BufOnly<CR>
 map <leader>dg :diffget<CR>
 map <leader>dp :diffput<CR>
@@ -90,7 +100,7 @@ nmap <leader>sf :%s/<c-r>=expand("<cword>")<cr>//g<Left><Left>
 map <leader>w :w<CR>
 map <leader>x :ccl<CR>
 nnoremap <silent> <Leader>r :call CycleNumbers ()<CR>
-nnoremap <leader>q :bdelete<CR>
+nnoremap <leader>q :bp\|bd #<CR>
 noremap <leader><Left> :diffget //2<CR>
 noremap <leader><Right> :diffget //3<CR>
 
@@ -100,10 +110,10 @@ inoremap <F2> <c-o>:w<cr>
 nmap <F3> yitvatp
 nmap <F4> :so $MYVIMRC<CR>
 nnoremap <F7> :let @+=expand("%:p")<CR>
+nmap <F5> :set wrap linebreak nolist<CR>
 nmap <F12> :call ToggleColorscheme()<CR>
 
 "--- Fugitive bindings ---
-
 nnoremap <leader>ga :Git add %:p<CR><CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gc :Gcommit -v -q<CR>
@@ -123,7 +133,7 @@ nnoremap <leader>gpl :Dispatch! git pull<CR>
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-"let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
@@ -172,7 +182,7 @@ set incsearch " Search while you enter the query, not after
 set undolevels=1000 " More undos
 set title " Vim can set the title of the terminal window
 set t_Co=256 " Tell vim that your terminal supports 256 colors
-set vb t_vb= " No beeping or flickering on error
+set visualbell t_vb= " No beeping or flickering on error
 set nobackup "no backup files
 set noswapfile
 set encoding=utf-8   
@@ -180,6 +190,7 @@ set diffopt+=vertical
 set cursorline
 set relativenumber
 set number
+set guicursor=
 
 "Airline
 set laststatus=2 " vim-airline always show
