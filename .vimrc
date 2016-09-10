@@ -1,7 +1,10 @@
 silent! call plug#begin()
-"General
+" Colorschemes
 Plug 'flazz/vim-colorschemes' 
 Plug 'chriskempson/base16-vim' 
+Plug 'rakr/vim-one' 
+Plug 'morhetz/gruvbox' 
+"General
 Plug 'jiangmiao/auto-pairs' "Add closing quote, bracket etc
 "Plug 'scrooloose/syntastic' "Lintin
 Plug 'blueyed/vim-diminactive' "Dim inactive windows
@@ -21,17 +24,15 @@ Plug 'honza/vim-snippets' "Snippet lib
 Plug 'mbbill/undotree' 
 Plug 'SirVer/ultisnips' 
 Plug 'honza/vim-snippets' 
-" Custom text objects
-Plug 'kana/vim-textobj-user' 
-Plug 'jasonlong/vim-textobj-css' 
-Plug 'kana/vim-textobj-entire' 
 "Plug 'Valloric/YouCompleteMe' 
 Plug 'vim-scripts/BufOnly.vim' "Close all but current buffer
 Plug 'tpope/vim-dispatch' "Dispatch commands from within vim
 Plug 'wincent/loupe' "Better in-file searching 
 Plug 'christoomey/vim-system-copy' 
-Plug 'honza/vim-snippets' 
-Plug 'SirVer/ultisnips' 
+" Custom text objects
+Plug 'kana/vim-textobj-user' 
+Plug 'jasonlong/vim-textobj-css' 
+Plug 'kana/vim-textobj-entire' 
 "HTML/CSS
 Plug 'mattn/emmet-vim' "Emmet
 Plug 'Rykka/colorv.vim'
@@ -81,6 +82,9 @@ cnoremap <C-e> <End>
 nnoremap <c-s> :w<CR> 
 inoremap <c-s> <c-o>:w<cr>
 vnoremap <c-s> <Esc>:w<CR> 
+
+" One colorscheme
+let g:one_allow_italics = 1 
 
 " --- Leader mappings ---
 nmap <leader><leader> <C-^>
@@ -191,6 +195,7 @@ set cursorline
 set relativenumber
 set number
 set guicursor=
+set gcr=n:blinkon0
 
 "Airline
 set laststatus=2 " vim-airline always show
@@ -199,6 +204,7 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_theme='one'
 
 "Gvim settings
 set lines=10000 columns=10000 "Start gvim maximized
@@ -208,11 +214,11 @@ set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
 
-colorscheme base16-ocean
+colorscheme one
 if has('mac')
     set highlight+=N:DiffText " make current line number stand out a little
     set highlight+=c:LineNr  
-    set guifont=Sauce\ Code\ Powerline\ Light:h15 
+    set guifont=Sauce\ Code\ Powerline\ Light:h16 
 elseif has('win32') || has('win64')
     au GuiEnter * set visualbell t_vb= "No bells or flickering on error
     au GUIEnter * simalt ~x "Start maximized
@@ -224,8 +230,10 @@ endif
 function! ToggleColorscheme()
     if (g:colors_name == "base16-ocean")
       colors tomorrow-night
-    else
-      colors base16-ocean
+  elseif (g:colors_name == "tomorrow-night")
+      colors one
+    else 
+        colors base16-ocean
     endif
 endfunction
 
