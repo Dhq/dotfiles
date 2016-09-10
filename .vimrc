@@ -7,7 +7,7 @@ Plug 'scrooloose/syntastic' "Lintin
 Plug 'blueyed/vim-diminactive' "Dim inactive windows
 Plug 'scrooloose/nerdtree'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
-Plug 'scrooloose/nerdcommenter' "Comment and uncoment code 
+Plug 'tpope/vim-commentary' "Comment and uncoment code 
 Plug 'kshenoy/vim-signature' "Display marks on the side
 Plug 'vim-airline/vim-airline' 
 Plug 'vim-airline/vim-airline-themes' 
@@ -21,10 +21,15 @@ Plug 'honza/vim-snippets' "Snippet lib
 Plug 'mbbill/undotree' 
 Plug 'SirVer/ultisnips' 
 Plug 'honza/vim-snippets' 
+" Custom text objects
+Plug 'kana/vim-textobj-user' 
+Plug 'jasonlong/vim-textobj-css' 
+Plug 'kana/vim-textobj-entire' 
 "Plug 'Valloric/YouCompleteMe' 
 Plug 'vim-scripts/BufOnly.vim' "Close all but current buffer
 Plug 'tpope/vim-dispatch' "Dispatch commands from within vim
 Plug 'wincent/loupe' "Better in-file searching 
+Plug 'christoomey/vim-system-copy' 
 "HTML/CSS
 Plug 'mattn/emmet-vim' "Emmet
 Plug 'Rykka/colorv.vim'
@@ -66,10 +71,12 @@ nnoremap <Left> :bprev<CR>
 nnoremap <Right> :bnext<CR>
 nnoremap <CR> :noh<CR><CR>
 let g:user_emmet_leader_key='<C-Z>'
+cabbr %% <C-R>=expand(':echo pwd')<CR>
 
 " --- Leader mappings ---
 nmap <leader><leader> <C-^>
 map <leader>a :Ag 
+map <leader>e :silent !open .<CR>
 map <leader>f :NERDTreeFind<CR>
 let g:ctrlp_map = '<leader>p'
 nmap <leader>b :CtrlPBuffer<CR>
@@ -86,12 +93,13 @@ nnoremap <silent> <Leader>r :call CycleNumbers ()<CR>
 nnoremap <leader>q :bdelete<CR>
 noremap <leader><Left> :diffget //2<CR>
 noremap <leader><Right> :diffget //3<CR>
+
 "--- Function mappings ---
 nmap <F1> gg=G'' 
 inoremap <F2> <c-o>:w<cr>
 nmap <F3> yitvatp
 nmap <F4> :so $MYVIMRC<CR>
-nmap <F5> :set wrap linebreak nolist<CR>
+nnoremap <F7> :let @+=expand("%:p")<CR>
 nmap <F12> :call ToggleColorscheme()<CR>
 
 "--- Fugitive bindings ---
@@ -171,6 +179,7 @@ set encoding=utf-8
 set diffopt+=vertical
 set cursorline
 set relativenumber
+set number
 
 "Airline
 set laststatus=2 " vim-airline always show
