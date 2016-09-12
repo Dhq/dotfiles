@@ -8,7 +8,7 @@ Plug 'morhetz/gruvbox'
 Plug 'jiangmiao/auto-pairs' "Add closing quote, bracket etc
 "Plug 'scrooloose/syntastic' "Lintin
 Plug 'blueyed/vim-diminactive' "Dim inactive windows
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-commentary' "Comment and uncoment code 
 Plug 'kshenoy/vim-signature' "Display marks on the side
