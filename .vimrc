@@ -8,7 +8,7 @@ Plug 'morhetz/gruvbox'
 Plug 'jiangmiao/auto-pairs' "Add closing quote, bracket etc
 "Plug 'scrooloose/syntastic' "Lintin
 Plug 'blueyed/vim-diminactive' "Dim inactive windows
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-commentary' "Comment and uncoment code 
 Plug 'kshenoy/vim-signature' "Display marks on the side
@@ -20,7 +20,6 @@ Plug 'rking/ag.vim'
 Plug 'AndrewRadev/splitjoin.vim' 
 Plug 'editorconfig/editorconfig-vim' "Matches current html tag
 Plug 'duggiefresh/vim-easydir' "Creates folder if not exists, new file
-Plug 'honza/vim-snippets' "Snippet lib
 Plug 'mbbill/undotree' 
 Plug 'SirVer/ultisnips' 
 Plug 'honza/vim-snippets' 
@@ -35,20 +34,21 @@ Plug 'jasonlong/vim-textobj-css'
 Plug 'kana/vim-textobj-entire' 
 "HTML/CSS
 Plug 'mattn/emmet-vim' "Emmet
-Plug 'Rykka/colorv.vim'
-Plug 'othree/html5.vim'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'ap/vim-css-color' "Color preview in css
-Plug 'tpope/vim-ragtag' "Faster creating of tags
+Plug 'Rykka/colorv.vim', { 'for': ['html', 'xml', 'js', 'jsx'] }  
+Plug 'othree/html5.vim', { 'for': ['html', 'xml', 'js', 'jsx'] }  
+Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }   
+Plug 'ap/vim-css-color', { 'for': 'css' }   "Color preview in css
+Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'js', 'jsx'] }  "Faster creating of tags
 Plug 'gregsexton/MatchTag' "Matches current html tag
-Plug 'groenewege/vim-less' 
-Plug 'alvan/vim-closetag' 
+Plug 'groenewege/vim-less', { 'for': 'less' } 
+Plug 'alvan/vim-closetag', { 'for': 'elm' }
 "JS
-Plug 'mxw/vim-jsx'
+Plug 'mxw/vim-jsx,', { 'for': 'javascript' }
 Plug 'othree/yajs.vim', { 'for': 'javascript' } "Js syntax
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
+Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
 "Elm
-Plug 'lambdatoast/elm.vim'
+Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
 "Git
 Plug 'airblade/vim-gitgutter' 
 Plug 'tpope/vim-fugitive' 
@@ -212,9 +212,9 @@ set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
-
-
 colorscheme one
+
+
 if has('mac')
     set highlight+=N:DiffText " make current line number stand out a little
     set highlight+=c:LineNr  
