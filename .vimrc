@@ -34,14 +34,13 @@ Plug 'jasonlong/vim-textobj-css'
 Plug 'kana/vim-textobj-entire' 
 "HTML/CSS
 Plug 'mattn/emmet-vim' "Emmet
-Plug 'Rykka/colorv.vim', { 'for': ['html', 'xml', 'js', 'jsx'] }  
-Plug 'othree/html5.vim', { 'for': ['html', 'xml', 'js', 'jsx'] }  
-Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }   
-Plug 'ap/vim-css-color', { 'for': 'css' }   "Color preview in css
-Plug 'tpope/vim-ragtag', { 'for': ['html', 'xml', 'js', 'jsx'] }  "Faster creating of tags
+Plug 'Rykka/colorv.vim'
+Plug 'othree/html5.vim'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'ap/vim-css-color'
 Plug 'gregsexton/MatchTag' "Matches current html tag
-Plug 'groenewege/vim-less', { 'for': 'less' } 
-Plug 'alvan/vim-closetag', { 'for': 'elm' }
+Plug 'groenewege/vim-less'
+Plug 'alvan/vim-closetag'
 "JS
 Plug 'mxw/vim-jsx,', { 'for': 'javascript' }
 Plug 'othree/yajs.vim', { 'for': 'javascript' } "Js syntax
