@@ -31,6 +31,7 @@ Plug 'christoomey/vim-system-copy'
 " Custom text objects
 Plug 'kana/vim-textobj-user' 
 Plug 'jasonlong/vim-textobj-css' 
+Plug 'glts/vim-textobj-comment' 
 Plug 'kana/vim-textobj-entire' 
 "HTML/CSS
 Plug 'mattn/emmet-vim' "Emmet
