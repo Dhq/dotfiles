@@ -151,6 +151,7 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links'
   \ }
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:indent_guides_start_level = 2
 let g:used_javascript_libs = 'jQuery,angular,react'
  " Trigger configuration. Do not use <tab> if you use YouCompleteMe
