@@ -146,6 +146,8 @@ let g:syntastic_check_on_w = 0
 let g:ag_working_path_mode="r"
 set wildignore+=*/node_modules/*,*/.DS_Store,*/bin/*,*/obj/*,*/bower_components/*
 set wildignore+=*.bmp,*.jpg,*.gif,*.jpeg,*.png,*.dll,*.exe,*.ico
+"let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard', 'bower_components', 'node_modules']
+let g:ctrlp_cmd='CtrlP :pwd'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn|bower_components|node_modules)$',
   \ 'file': '\v\.(exe|so|dll)$',
