@@ -196,6 +196,7 @@ set relativenumber
 set number
 set guicursor=
 set gcr=n:blinkon0
+set iskeyword+=-
 
 "Airline
 set laststatus=2 " vim-airline always show
