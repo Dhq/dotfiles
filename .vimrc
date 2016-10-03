@@ -23,6 +23,7 @@ Plug 'duggiefresh/vim-easydir' "Creates folder if not exists, new file
 Plug 'mbbill/undotree' 
 Plug 'SirVer/ultisnips' 
 Plug 'honza/vim-snippets' 
+Plug 'mhinz/vim-startify' 
 "Plug 'Valloric/YouCompleteMe' 
 Plug 'vim-scripts/BufOnly.vim' "Close all but current buffer
 Plug 'tpope/vim-dispatch' "Dispatch commands from within vim
