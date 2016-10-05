@@ -1,38 +1,38 @@
 silent! call plug#begin()
 " Colorschemes
-Plug 'flazz/vim-colorschemes' 
-Plug 'chriskempson/base16-vim' 
-Plug 'rakr/vim-one' 
-Plug 'morhetz/gruvbox' 
+Plug 'flazz/vim-colorschemes'
+Plug 'chriskempson/base16-vim'
+Plug 'rakr/vim-one'
+Plug 'morhetz/gruvbox'
 "General
 Plug 'jiangmiao/auto-pairs' "Add closing quote, bracket etc
 "Plug 'scrooloose/syntastic' "Lintin
 Plug 'blueyed/vim-diminactive' "Dim inactive windows
 Plug 'scrooloose/nerdtree'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
-Plug 'tpope/vim-commentary' "Comment and uncoment code 
+Plug 'tpope/vim-commentary' "Comment and uncoment code
 Plug 'kshenoy/vim-signature' "Display marks on the side
-Plug 'vim-airline/vim-airline' 
-Plug 'vim-airline/vim-airline-themes' 
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'dkprice/vim-easygrep'
-Plug 'tpope/vim-surround' 
-Plug 'rking/ag.vim' 
-Plug 'AndrewRadev/splitjoin.vim' 
+Plug 'tpope/vim-surround'
+Plug 'rking/ag.vim'
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'editorconfig/editorconfig-vim' "Matches current html tag
 Plug 'duggiefresh/vim-easydir' "Creates folder if not exists, new file
-Plug 'mbbill/undotree' 
-Plug 'SirVer/ultisnips' 
-Plug 'honza/vim-snippets' 
-"Plug 'Valloric/YouCompleteMe' 
+Plug 'mbbill/undotree'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+"Plug 'Valloric/YouCompleteMe'
 Plug 'vim-scripts/BufOnly.vim' "Close all but current buffer
 Plug 'tpope/vim-dispatch' "Dispatch commands from within vim
-Plug 'wincent/loupe' "Better in-file searching 
-Plug 'christoomey/vim-system-copy' 
+Plug 'wincent/loupe' "Better in-file searching
+Plug 'christoomey/vim-system-copy'
 " Custom text objects
-Plug 'kana/vim-textobj-user' 
-Plug 'jasonlong/vim-textobj-css' 
-Plug 'glts/vim-textobj-comment' 
-Plug 'kana/vim-textobj-entire' 
+Plug 'kana/vim-textobj-user'
+Plug 'jasonlong/vim-textobj-css'
+Plug 'glts/vim-textobj-comment'
+Plug 'kana/vim-textobj-entire'
 "HTML/CSS
 Plug 'mattn/emmet-vim' "Emmet
 Plug 'Rykka/colorv.vim'
@@ -50,14 +50,14 @@ Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
 "Elm
 Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
 "Git
-Plug 'airblade/vim-gitgutter' 
-Plug 'tpope/vim-fugitive' 
-"Other 
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+"Other
 Plug 'plasticboy/vim-markdown'
-Plug 'OrangeT/vim-csharp' 
+Plug 'OrangeT/vim-csharp'
 call plug#end()
 
-"--- Standard mappings 
+"--- Standard mappings
 map <Space> <leader>
 nnoremap <leader><tab> <C-^>
 nmap Q q
@@ -79,16 +79,16 @@ nnoremap <CR> :noh<CR><CR>
 let g:user_emmet_leader_key='<C-Z>'
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-nnoremap <c-s> :w<CR> 
+nnoremap <c-s> :w<CR>
 inoremap <c-s> <c-o>:w<cr>
-vnoremap <c-s> <Esc>:w<CR> 
+vnoremap <c-s> <Esc>:w<CR>
 
 " One colorscheme
-let g:one_allow_italics = 1 
+let g:one_allow_italics = 1
 
 " --- Leader mappings ---
 nmap <leader><leader> <C-^>
-map <leader>a :Ag 
+map <leader>a :Ag<space>
 map <leader>e :silent !open .<CR>
 map <leader>f :NERDTreeFind<CR>
 let g:ctrlp_map = '<leader>p'
@@ -109,7 +109,7 @@ noremap <leader><Left> :diffget //2<CR>
 noremap <leader><Right> :diffget //3<CR>
 
 "--- Function mappings ---
-nmap <F1> gg=G'' 
+nmap <F1> gg=G''
 inoremap <F2> <c-o>:w<cr>
 nmap <F3> yitvatp
 nmap <F4> :so $MYVIMRC<CR>
@@ -153,6 +153,7 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links'
   \ }
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 let g:indent_guides_start_level = 2
 let g:used_javascript_libs = 'jQuery,angular,react'
  " Trigger configuration. Do not use <tab> if you use YouCompleteMe
@@ -161,7 +162,7 @@ let g:UltiSnipsJumpForwardTrigger = '<Tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 let g:ag_prg='ag -S --nocolor --nogroup --column --ignore node_modules --ignore bower_components'
 let NERDTreeShowHidden=1
-let g:gitgutter_sign_column_always=1 
+let g:gitgutter_sign_column_always=1
 syntax enable " Enable syntax processing
 filetype plugin on
 runtime macros/matchit.vim "Needed to get matchit to work on html tags?
@@ -169,7 +170,7 @@ runtime macros/matchit.vim "Needed to get matchit to work on html tags?
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 set nocompatible
-set hidden
+set hidden "OK to hide buffers without saving them
 set noshowmode
 set nofoldenable "Dont fold automatically
 set nowrap " Lines of code will not wrap to the next line
@@ -191,7 +192,7 @@ set t_Co=256 " Tell vim that your terminal supports 256 colors
 set visualbell t_vb= " No beeping or flickering on error
 set nobackup "no backup files
 set noswapfile
-set encoding=utf-8   
+set encoding=utf-8
 set diffopt+=vertical
 set cursorline
 set relativenumber
@@ -199,7 +200,11 @@ set number
 set guicursor=
 set gcr=n:blinkon0
 set iskeyword+=-
-
+set formatoptions+=j "Clever joining
+set formatoptions+=n "Clever newline
+set lazyredraw "Dont bother updating screen during macro playback etc
+set virtualedit=block               " allow cursor to move where there is no text in visual block mode
+set noea "Dont equalsize windows after closing one window
 "Airline
 set laststatus=2 " vim-airline always show
 let g:airline#extensions#tabline#enabled = 1
@@ -220,8 +225,8 @@ colorscheme one
 
 if has('mac')
     set highlight+=N:DiffText " make current line number stand out a little
-    set highlight+=c:LineNr  
-    set guifont=Sauce\ Code\ Powerline\ Light:h16 
+    set highlight+=c:LineNr
+    set guifont=Sauce\ Code\ Powerline\ Light:h16
 elseif has('win32') || has('win64')
     au GuiEnter * set visualbell t_vb= "No bells or flickering on error
     au GUIEnter * simalt ~x "Start maximized
@@ -235,7 +240,7 @@ function! ToggleColorscheme()
       colors tomorrow-night
   elseif (g:colors_name == "tomorrow-night")
       colors one
-    else 
+    else
         colors base16-ocean
     endif
 endfunction
