@@ -14,7 +14,6 @@ Plug 'tpope/vim-commentary' "Comment and uncoment code
 Plug 'kshenoy/vim-signature' "Display marks on the side
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'dkprice/vim-easygrep'
 Plug 'tpope/vim-surround'
 Plug 'rking/ag.vim'
 Plug 'AndrewRadev/splitjoin.vim'
