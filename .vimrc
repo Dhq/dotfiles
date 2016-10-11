@@ -83,9 +83,6 @@ nnoremap <c-s> :w<CR>
 inoremap <c-s> <c-o>:w<cr>
 vnoremap <c-s> <Esc>:w<CR>
 
-" One colorscheme
-let g:one_allow_italics = 1
-
 " --- Leader mappings ---
 nmap <leader><leader> <C-^>
 map <leader>a :Ag<space>
@@ -163,6 +160,8 @@ let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 let g:ag_prg='ag -S --nocolor --nogroup --column --ignore node_modules --ignore bower_components'
 let NERDTreeShowHidden=1
 let g:gitgutter_sign_column_always=1
+
+colorscheme one
 syntax enable " Enable syntax processing
 filetype plugin on
 runtime macros/matchit.vim "Needed to get matchit to work on html tags?
@@ -194,17 +193,22 @@ set nobackup "no backup files
 set noswapfile
 set encoding=utf-8
 set diffopt+=vertical
-set cursorline
+set cursorline "Highligh current line
 set relativenumber
 set number
 set guicursor=
 set gcr=n:blinkon0
-set iskeyword+=-
 set formatoptions+=j "Clever joining
 set formatoptions+=n "Clever newline
+set nojoinspaces "Squash multiple spaces when joining lines
 set lazyredraw "Dont bother updating screen during macro playback etc
 set virtualedit=block               " allow cursor to move where there is no text in visual block mode
 set noea "Dont equalsize windows after closing one window
+set scrolloff=3
+if has('termguicolors')
+    set termguicolors
+endif
+
 "Airline
 set laststatus=2 " vim-airline always show
 let g:airline#extensions#tabline#enabled = 1
@@ -220,7 +224,6 @@ set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
-colorscheme one
 
 
 if has('mac')
