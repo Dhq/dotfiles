@@ -16,7 +16,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-surround'
 Plug 'rking/ag.vim'
-Plug 'AndrewRadev/splitjoin.vim'
 Plug 'editorconfig/editorconfig-vim' "Matches current html tag
 Plug 'duggiefresh/vim-easydir' "Creates folder if not exists, new file
 Plug 'mbbill/undotree'
@@ -43,7 +42,7 @@ Plug 'gregsexton/MatchTag' "Matches current html tag
 Plug 'groenewege/vim-less'
 Plug 'alvan/vim-closetag'
 "JS
-Plug 'mxw/vim-jsx,', { 'for': 'javascript' }
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 Plug 'othree/yajs.vim', { 'for': 'javascript' } "Js syntax
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
 Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
@@ -160,6 +159,7 @@ let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 let g:ag_prg='ag -S --nocolor --nogroup --column --ignore node_modules --ignore bower_components'
 let NERDTreeShowHidden=1
 let g:gitgutter_sign_column_always=1
+let g:jsx_ext_required = 0
 
 colorscheme one
 syntax enable " Enable syntax processing
