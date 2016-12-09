@@ -7,7 +7,7 @@ Plug 'rakr/vim-one'
 Plug 'morhetz/gruvbox'
 "General
 Plug 'jiangmiao/auto-pairs' "Add closing quote, bracket etc
-"Plug 'scrooloose/syntastic' "Lintin
+Plug 'scrooloose/syntastic' "Lintin
 Plug 'blueyed/vim-diminactive' "Dim inactive windows
 Plug 'scrooloose/nerdtree'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
@@ -31,8 +31,6 @@ Plug 'wincent/loupe' "Better in-file searching
 Plug 'christoomey/vim-system-copy'
 " Custom text objects
 Plug 'kana/vim-textobj-user'
-Plug 'jasonlong/vim-textobj-css'
-Plug 'glts/vim-textobj-comment'
 Plug 'kana/vim-textobj-entire'
 "HTML/CSS
 Plug 'mattn/emmet-vim' "Emmet
@@ -135,23 +133,22 @@ nnoremap <leader>gpl :Dispatch! git pull<CR>
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_eslint_exec = 'eslint_d'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_check_on_w = 0
 let g:ag_working_path_mode="r"
 set wildignore+=*/node_modules/*,*/.DS_Store,*/bin/*,*/obj/*,*/bower_components/*
 set wildignore+=*.bmp,*.jpg,*.gif,*.jpeg,*.png,*.dll,*.exe,*.ico
-"let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard', 'bower_components', 'node_modules']
 let g:ctrlp_cmd='CtrlP :pwd'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn|bower_components|node_modules)$',
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links'
   \ }
-"let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:indent_guides_start_level = 2
 let g:used_javascript_libs = 'jQuery,angular,react'
  " Trigger configuration. Do not use <tab> if you use YouCompleteMe
@@ -162,7 +159,7 @@ let g:ag_prg='ag -S --nocolor --nogroup --column --ignore node_modules --ignore 
 let NERDTreeShowHidden=1
 let g:gitgutter_sign_column_always=1
 
-colorscheme one
+colorscheme iceberg
 syntax enable " Enable syntax processing
 filetype plugin on
 runtime macros/matchit.vim "Needed to get matchit to work on html tags?
