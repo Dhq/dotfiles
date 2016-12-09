@@ -1,5 +1,6 @@
 silent! call plug#begin()
 " Colorschemes
+Plug 'cocopon/iceberg.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'chriskempson/base16-vim'
 Plug 'rakr/vim-one'
@@ -150,7 +151,7 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links'
   \ }
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+"let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 let g:indent_guides_start_level = 2
 let g:used_javascript_libs = 'jQuery,angular,react'
  " Trigger configuration. Do not use <tab> if you use YouCompleteMe
@@ -243,6 +244,8 @@ function! ToggleColorscheme()
       colors tomorrow-night
   elseif (g:colors_name == "tomorrow-night")
       colors one
+  elseif (g:colors_name == "one")
+      colors iceberg
     else
         colors base16-ocean
     endif
