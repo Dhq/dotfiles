@@ -7,7 +7,8 @@ Plug 'rakr/vim-one'
 "General
 Plug 'jiangmiao/auto-pairs' "Add closing quote, bracket etc
 Plug 'scrooloose/syntastic' "Lintin
-Plug 'blueyed/vim-diminactive' "Dim inactive windows
+Plug 'junegunn/vim-emoji'
+"Plug 'blueyed/vim-diminactive' "Dim inactive windows
 Plug 'scrooloose/nerdtree'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-commentary' "Comment and uncoment code
@@ -27,6 +28,7 @@ Plug 'tpope/vim-dispatch' "Dispatch commands from within vim
 Plug 'wincent/loupe' "Better in-file searching
 Plug 'christoomey/vim-system-copy'
 Plug 'sheerun/vim-polyglot' "Bunch of lang syntaxes
+Plug 'ervandew/supertab'
 " Custom text objects
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
@@ -62,6 +64,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-n> :cn<CR>
 nnoremap <C-p> :cN<CR>
+
 nmap <Up> <Plug>GitGutterPrevHunk
 nmap <Down> <Plug>GitGutterNextHunk
 nnoremap <Left> :bprev<CR>
@@ -91,6 +94,8 @@ nmap <leader>sl :s/<c-r>=expand("<cword>")<cr>//g<Left><Left>
 nmap <leader>sf :%s/<c-r>=expand("<cword>")<cr>//g<Left><Left>
 map <leader>w :w<CR>
 map <leader>x :ccl<CR>
+map <leader><Up> :lprev<CR>
+map <leader><Down> :lnext<CR>
 nnoremap <silent> <Leader>r :call CycleNumbers ()<CR>
 nnoremap <leader>q :bp\|bd #<CR>
 noremap <leader><Left> :diffget //2<CR>
@@ -122,15 +127,26 @@ nnoremap <leader>go :Git checkout<Space>
 nnoremap <leader>gps :Dispatch! git push<CR>
 nnoremap <leader>gpl :Dispatch! git pull<CR>
 
+"Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-" let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_javascript_eslint_exec = 'eslint_d'
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = 'eslint_d'
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_loc_list_height = 5
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 1
+let g:syntastic_error_symbol = emoji#for('x')
+let g:syntastic_style_error_symbol = emoji#for('exclamation')
+let g:syntastic_warning_symbol = emoji#for('bell')
+let g:syntastic_style_warning_symbol = emoji#for('poop')
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+highlight link SyntasticStyleErrorSign SignColumn
+highlight link SyntasticStyleWarningSign SignColumn
+
 let g:ag_working_path_mode="r"
 set wildignore+=*/node_modules/*,*/.DS_Store,*/bin/*,*/obj/*,*/bower_components/*
 set wildignore+=*.bmp,*.jpg,*.gif,*.jpeg,*.png,*.dll,*.exe,*.ico
@@ -141,7 +157,6 @@ let g:ctrlp_custom_ignore = {
   \ 'link': 'some_bad_symbolic_links'
   \ }
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-let g:indent_guides_start_level = 2
 let g:used_javascript_libs = 'jQuery,angular,react'
  " Trigger configuration. Do not use <tab> if you use YouCompleteMe
 let g:UltiSnipsExpandTrigger = '<Tab>'
@@ -155,7 +170,7 @@ let g:jsx_ext_required = 0
 colorscheme iceberg
 syntax enable " Enable syntax processing
 filetype plugin on
-runtime macros/matchit.vim "Needed to get matchit to work on html tags?
+runtime macros/matchit.vim " % work for xml/html tags as well
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
@@ -216,11 +231,10 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
-
 if has('mac')
-    set highlight+=N:DiffText " make current line number stand out a little
+    "set highlight+=N:DiffText " make current line number stand out a little
     set highlight+=c:LineNr
-    set guifont=Sauce\ Code\ Powerline\ Light:h16
+    set guifont=Sauce\ Code\ Powerline\ Light:h18
 elseif has('win32') || has('win64')
     au GuiEnter * set visualbell t_vb= "No bells or flickering on error
     au GUIEnter * simalt ~x "Start maximized
