@@ -7,7 +7,7 @@ Plug 'rakr/vim-one'
 "General
 Plug 'jiangmiao/auto-pairs' "Add closing quote, bracket etc
 Plug 'scrooloose/syntastic' "Lintin
-Plug 'junegunn/vim-emoji'
+"Plug 'junegunn/vim-emoji'
 "Plug 'blueyed/vim-diminactive' "Dim inactive windows
 Plug 'scrooloose/nerdtree'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
