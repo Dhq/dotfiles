@@ -6,9 +6,9 @@ Plug 'chriskempson/base16-vim'
 Plug 'rakr/vim-one'
 "General
 Plug 'jiangmiao/auto-pairs' "Add closing quote, bracket etc
-Plug 'scrooloose/syntastic' "Lintin
+"Plug 'scrooloose/syntastic' "Lintin
 "Plug 'junegunn/vim-emoji'
-"Plug 'blueyed/vim-diminactive' "Dim inactive windows
+Plug 'blueyed/vim-diminactive' "Dim inactive windows
 Plug 'scrooloose/nerdtree'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-commentary' "Comment and uncoment code
@@ -19,8 +19,8 @@ Plug 'tpope/vim-surround'
 Plug 'rking/ag.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'duggiefresh/vim-easydir' "Creates folder if not exists, new file
-Plug 'mbbill/undotree'
-Plug 'SirVer/ultisnips'
+"Plug 'mbbill/undotree'
+"Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'mhinz/vim-startify'
 Plug 'vim-scripts/BufOnly.vim' "Close all but current buffer
@@ -34,7 +34,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
 "HTML/CSS
 Plug 'mattn/emmet-vim' "Emmet
-Plug 'Rykka/colorv.vim'
+Plug 'Rykka/colorv.vim' 
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
 Plug 'gregsexton/MatchTag' "Matches current html tag
@@ -138,10 +138,10 @@ let g:syntastic_loc_list_height = 5
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
-let g:syntastic_error_symbol = emoji#for('x')
-let g:syntastic_style_error_symbol = emoji#for('exclamation')
-let g:syntastic_warning_symbol = emoji#for('bell')
-let g:syntastic_style_warning_symbol = emoji#for('poop')
+"let g:syntastic_error_symbol = emoji#for('x')
+"let g:syntastic_style_error_symbol = emoji#for('exclamation')
+"let g:syntastic_warning_symbol = emoji#for('bell')
+"let g:syntastic_style_warning_symbol = emoji#for('poop')
 highlight link SyntasticErrorSign SignColumn
 highlight link SyntasticWarningSign SignColumn
 highlight link SyntasticStyleErrorSign SignColumn
