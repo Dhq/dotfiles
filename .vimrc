@@ -34,7 +34,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
 "HTML/CSS
 Plug 'mattn/emmet-vim' "Emmet
-Plug 'Rykka/colorv.vim' 
+Plug 'Rykka/colorv.vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
 Plug 'gregsexton/MatchTag' "Matches current html tag
@@ -48,6 +48,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 "Other
 Plug 'OrangeT/vim-csharp'
+Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
 call plug#end()
 
 "--- Standard mappings
@@ -138,10 +139,6 @@ let g:syntastic_loc_list_height = 5
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
-"let g:syntastic_error_symbol = emoji#for('x')
-"let g:syntastic_style_error_symbol = emoji#for('exclamation')
-"let g:syntastic_warning_symbol = emoji#for('bell')
-"let g:syntastic_style_warning_symbol = emoji#for('poop')
 highlight link SyntasticErrorSign SignColumn
 highlight link SyntasticWarningSign SignColumn
 highlight link SyntasticStyleErrorSign SignColumn
@@ -152,19 +149,18 @@ set wildignore+=*/node_modules/*,*/.DS_Store,*/bin/*,*/obj/*,*/bower_components/
 set wildignore+=*.bmp,*.jpg,*.gif,*.jpeg,*.png,*.dll,*.exe,*.ico
 let g:ctrlp_cmd='CtrlP :pwd'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn|bower_components|node_modules)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links'
-  \ }
+      \ 'dir':  '\v[\/]\.(git|hg|svn|bower_components|node_modules)$',
+      \ 'file': '\v\.(exe|so|dll)$',
+      \ 'link': 'some_bad_symbolic_links'
+      \ }
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:used_javascript_libs = 'jQuery,angular,react'
- " Trigger configuration. Do not use <tab> if you use YouCompleteMe
+" Trigger configuration. Do not use <tab> if you use YouCompleteMe
 let g:UltiSnipsExpandTrigger = '<Tab>'
 let g:UltiSnipsJumpForwardTrigger = '<Tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 let g:ag_prg='ag -S --nocolor --nogroup --column --ignore node_modules --ignore bower_components'
 let NERDTreeShowHidden=1
-let g:gitgutter_sign_column_always=1
 let g:jsx_ext_required = 0
 
 colorscheme iceberg
@@ -212,7 +208,7 @@ set virtualedit=block               " allow cursor to move where there is no tex
 set noea "Dont equalsize windows after closing one window
 set scrolloff=3
 if has('termguicolors')
-    set termguicolors
+  set termguicolors
 endif
 
 "Airline
@@ -232,27 +228,27 @@ set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
 if has('mac')
-    "set highlight+=N:DiffText " make current line number stand out a little
-    set highlight+=c:LineNr
-    set guifont=Sauce\ Code\ Powerline\ Light:h18
+  "set highlight+=N:DiffText " make current line number stand out a little
+  set highlight+=c:LineNr
+  set guifont=Sauce\ Code\ Powerline\ Light:h18
 elseif has('win32') || has('win64')
-    au GuiEnter * set visualbell t_vb= "No bells or flickering on error
-    au GUIEnter * simalt ~x "Start maximized
-    set guifont=Powerline_Consolas:h11
-    let g:NERDTreeCopyCmd= 'cp -r' "To be able to copy with NerdTree on Win
+  au GuiEnter * set visualbell t_vb= "No bells or flickering on error
+  au GUIEnter * simalt ~x "Start maximized
+  set guifont=Powerline_Consolas:h11
+  let g:NERDTreeCopyCmd= 'cp -r' "To be able to copy with NerdTree on Win
 endif
 
 " --- Functions
 function! ToggleColorscheme()
-    if (g:colors_name == "base16-ocean")
-      colors tomorrow-night
+  if (g:colors_name == "base16-ocean")
+    colors tomorrow-night
   elseif (g:colors_name == "tomorrow-night")
-      colors one
+    colors one
   elseif (g:colors_name == "one")
-      colors iceberg
-    else
-        colors base16-ocean
-    endif
+    colors iceberg
+  else
+    colors base16-ocean
+  endif
 endfunction
 
 " Cycle through relativenumber + number, number (only), and no numbering.
@@ -268,3 +264,5 @@ function! CycleNumbers() abort
     set number!<CR>
   endif
 endfunction
+
+au BufReadPost *.view set syntax=html
