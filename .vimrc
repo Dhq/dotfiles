@@ -6,9 +6,9 @@ Plug 'chriskempson/base16-vim'
 Plug 'rakr/vim-one'
 "General
 Plug 'jiangmiao/auto-pairs' "Add closing quote, bracket etc
-Plug 'scrooloose/syntastic' "Lintin
+"Plug 'scrooloose/syntastic' "Lintin
 "Plug 'junegunn/vim-emoji'
-"Plug 'blueyed/vim-diminactive' "Dim inactive windows
+Plug 'blueyed/vim-diminactive' "Dim inactive windows
 Plug 'scrooloose/nerdtree'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-commentary' "Comment and uncoment code
@@ -18,7 +18,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-surround'
 Plug 'rking/ag.vim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'mbbill/undotree'
 Plug 'honza/vim-snippets'
 Plug 'mhinz/vim-startify'
 Plug 'wincent/loupe' "Better in-file searching
@@ -150,7 +149,6 @@ let g:UltiSnipsJumpForwardTrigger = '<Tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 let g:ag_prg='ag -S --nocolor --nogroup --column --ignore node_modules --ignore bower_components'
 let NERDTreeShowHidden=1
-set signcolumn=yes
 let g:jsx_ext_required = 0
 
 colorscheme iceberg
