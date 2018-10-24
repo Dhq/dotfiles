@@ -18,23 +18,14 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-surround'
 Plug 'rking/ag.vim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'duggiefresh/vim-easydir' "Creates folder if not exists, new file
 Plug 'mbbill/undotree'
-Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'mhinz/vim-startify'
-Plug 'vim-scripts/BufOnly.vim' "Close all but current buffer
-Plug 'tpope/vim-dispatch' "Dispatch commands from within vim
 Plug 'wincent/loupe' "Better in-file searching
 Plug 'christoomey/vim-system-copy'
 Plug 'sheerun/vim-polyglot' "Bunch of lang syntaxes
 Plug 'ervandew/supertab'
-" Custom text objects
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-entire'
 "HTML/CSS
-Plug 'mattn/emmet-vim' "Emmet
-Plug 'Rykka/colorv.vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
 Plug 'gregsexton/MatchTag' "Matches current html tag
@@ -45,9 +36,7 @@ Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
 Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
 "Git
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
 "Other
-Plug 'OrangeT/vim-csharp'
 Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
 call plug#end()
 
