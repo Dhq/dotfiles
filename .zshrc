@@ -9,7 +9,6 @@ source /Users/danhal/.bash_profile
 export PATH="$HOME/.npm-packages/bin:$PATH"
 export PATH=/npm/bin:$PATH
 export PATH="$HOME/bin/:$PATH"
-export PATH="$PATH:`yarn global bin`"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -69,6 +68,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
+source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -101,11 +101,13 @@ alias ev="vim ~/.vimrc"
 alias eh="sudo vim /etc/hosts"
 alias ez="vim ~/.zshrc"
 alias fg="cd ~/git"
+alias fh="cd ~";
 alias gs="git status"
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias links="ll node_modules | grep '>'"
 alias lv="npm view $1 version"
 alias fresh="git checkout master -f && git pull && yarn";
+alias sync_npm="curl -O -L https://npmjs.org/install.sh; sudo sh install.sh";
 
 alias rc="~/git/react-component-setup-script/react-component-setup $1"
 
