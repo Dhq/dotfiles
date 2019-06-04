@@ -108,6 +108,9 @@ alias links="ll node_modules | grep '>'"
 alias lv="npm view $1 version"
 alias fresh="git checkout master -f && git pull && yarn";
 alias sync_npm="curl -O -L https://npmjs.org/install.sh; sudo sh install.sh";
+alias check_port="nc -vz $1 $2";
+alias ec="emacsclient $1 -a '' -nqc";
+alias es="emacsclient $1 -a ''";
 
 alias rc="~/git/react-component-setup-script/react-component-setup $1"
 
