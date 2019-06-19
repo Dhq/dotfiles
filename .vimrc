@@ -198,6 +198,7 @@ set scrolloff=3
 if has('termguicolors')
   set termguicolors
 endif
+set clipboard=unnamed
 
 "Airline
 set laststatus=2 " vim-airline always show
