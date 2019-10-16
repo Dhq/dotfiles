@@ -6,6 +6,7 @@
   "Layer configuration:
 This function should only modify configuration layer settings."
   (setq-default
+
    ;; Base distribution to use. This is a layer contained in the directory
    ;; `+distribution'. For now available distributions are `spacemacs-base'
    ;; or `spacemacs'. (default 'spacemacs)
@@ -42,20 +43,19 @@ This function should only modify configuration layer settings."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      helm
-     auto-completion
-     ;; better-defaults
+     auto-completion 
      emacs-lisp
      git
      github
      (osx :variables osx-use-option-as-meta nil)
-     sql
-     react
+    sql
+    react
      org
-     ;; neotree
-      (shell :variables
-             shell-default-height 30
-             shell-default-position 'bottom)
-     ;; spell-checking
+   ;; neotree
+    (shell :variables
+           shell-default-height 30
+           shell-default-position 'bottom)
+   ;; spell-checking
       syntax-checking
       version-control
       themes-megapack
@@ -171,7 +171,7 @@ It should only modify the values of Spacemacs settings."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(doom-tomorrow-night
-                         spacemacs-dark)
+                         doom-tomorrow-day)
     ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
     ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
     ;; first three are spaceline themes. `doom' is the doom-emacs mode-line.
@@ -397,7 +397,9 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setq-default mac-right-option-modifier nil)
-
+  ;; Doom themes
+  (setq doom-themes-enable-bold nil    ; if nil, bold is universally disabled
+        doom-themes-enable-italic nil) ; if nil, italics is universally disabled
   )
 
 (defun dotspacemacs/user-config ()
@@ -410,21 +412,26 @@ you should place your code here."
 
   ;; (spacemacs/toggle-highlight-current-line-globally-off)
 
-
-  (add-hook 'js2-mode-hook 'prettier-js-mode)
-  (add-hook 'web-mode-hook 'prettier-js-mode)
-  (add-hook 'react-hook 'prettier-js-mode)
-
   (editorconfig-mode 1)
+
+
+  ;; vim like inc / dec nr 
+  (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
+  (define-key evil-visual-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map (kbd "C-x") 'evil-numbers/dec-at-pt)
+  (define-key evil-visual-state-map (kbd "C-x") 'evil-numbers/dec-at-pt)
+
 
   ;; Prettier
  (add-hook 'js2-mode-hook 'prettier-js-mode)
  (add-hook 'web-mode-hook 'prettier-js-mode)
  (add-hook 'react-mode-hook 'prettier-js-mode)
+ (add-hook 'typescript-mode-hook 'prettier-js-mode)
+  ;; prettier settings
   (setq prettier-js-args '(
-                            "--single-quote"
-                            "--trailing-comma"
-                            ))
+                           "--trailing-comma" "all"
+                           "--single-quote"
+                           ))
 
   ;; macOS-slowness fix?
   (which-key-remove-default-unicode-chars)
@@ -447,6 +454,8 @@ you should place your code here."
   ;; use only eslint with flycheck
   (require 'flycheck)
 
+  (setq tide-format-options '(:indentSize 2 :tabSize 2))
+
   ;; disable jshint since we prefer eslint checking
   (setq-default flycheck-disabled-checkers
                 (append flycheck-disabled-checkers
@@ -454,12 +463,7 @@ you should place your code here."
 
   ;; use eslint with web-mode for jsx files
   (flycheck-add-mode 'javascript-eslint 'web-mode)
-
-
-  ;; disable json-jsonlist checking for json files
-  (setq-default flycheck-disabled-checkers
-                (append flycheck-disabled-checkers
-                        '(json-jsonlist)))
+  (setq flycheck-check-syntax-automatically '(save mode-enable))
 
   ;;; When opening a file that is a symbolic link, don't ask whether I
   ;;; want to follow the link. Just do it
