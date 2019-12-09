@@ -2,6 +2,7 @@
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
+
 (defun dotspacemacs/layers ()
   "Layer configuration:
 This function should only modify configuration layer settings."
@@ -482,17 +483,17 @@ you should place your code here."
 
   (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
   ;; Hack for sys clipboard
-  (defun copy-from-osx ()
-    (shell-command-to-string "pbpaste"))
-
-  (defun paste-to-osx (text &optional push)
-    (let ((process-connection-type nil))
-      (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
-        (process-send-string proc text)
-        (process-send-eof proc))))
-
-  (setq interprogram-cut-function 'paste-to-osx)
-  (setq interprogram-paste-function 'copy-from-osx) 
+;;  (defun copy-from-osx ()
+;;    (shell-command-to-string "pbpaste"))
+;;
+;;  (defun paste-to-osx (text &optional push)
+;;    (let ((process-connection-type nil))
+;;      (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+;;        (process-send-string proc text)
+;;        (process-send-eof proc))))
+;;
+;;  (setq interprogram-cut-function 'paste-to-osx)
+;;  (setq interprogram-paste-function 'copy-from-osx) 
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
