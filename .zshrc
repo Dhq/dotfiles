@@ -10,6 +10,7 @@ export PATH="$HOME/.npm-packages/bin:$PATH"
 export PATH=/npm/bin:$PATH
 export PATH="$HOME/bin/:$PATH"
 
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -66,6 +67,18 @@ plugins=(git npm brew osx z extract jsontools yarn vi-mode zsh-syntax-highlighti
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+ 
+# Enables shims and autocompletion
+eval "$(pyenv init -)"
+ 
+# Optional
+# This stops pyenv-virutalenv from rewriting your prompt
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+ 
+# Activates the correct virtualenv automatically when entering a project.
+eval "$(pyenv virtualenv-init -)"
 
 source $ZSH/oh-my-zsh.sh
 source "/usr/local/opt/fzf/shell/key-bindings.zsh"
