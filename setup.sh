@@ -148,7 +148,7 @@ done
  # ToDo: Set Slate etc to start at startup
 
  ### Command line tools - install new ones, update others to latest version
- brew install git wget zsh python pyenv fzf vim lastpass-cli autojump
+ brew install git wget zsh python pyenv fzf vim lastpass-cli autojump n yarn
 
  ### spacemacs github.com/syl20bnr/spacemacs
  git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
@@ -235,7 +235,7 @@ defaults write com.apple.dock autohide-delay -float 0
 # Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true
 
-# Only Show Open Applications In The Dock  
+# Only Show Open Applications In The Dock
 defaults write com.apple.dock static-only -bool true
 
 # Display full POSIX path as Finder window title
@@ -369,18 +369,17 @@ defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
 # Prevent Photos from opening automatically when devices are plugged in
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
-
 ##############################################
 # Install oh-my-zsh
 ##############################################
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-
-
 ##############################################
-# Install Node, n, yarn, global node pkgs
+# Install global node pkgs
 ##############################################
+
+yarn global add tern eslint yalc micro-proxy babel-cli cost-of-modules
 
 #############################################
 ### Install dotfiles repo, run link script
@@ -397,20 +396,12 @@ ln -s ~/git/dotfiles/.bashrc ~/.bashrc
 ln -s ~/git/dotfiles/.slate ~/.slate
 ln -s ~/git/dotfiles/.spacemacs ~/.spacemacs
 ln -s ~/git/dotfiles/.vimrc ~/.vimrc
+ln -s ~/git/dotfiles/.gitconfig ~/.gitconfig
+ln -s ~/git/dotfiles/.gitconfig_oss ~/.gitconfig_oss
 cd ~
-
-# --- STUFF LEFT -----
-# Unbind spotlight
-# configure Alfred
-## Hotkey
-## Powerpack
-# Install contexts
-# Load Iterm2 profile
 
 echo ""
 cecho "Done!" $cyan
-echo ""
-echo ""
 cecho "################################################################################" $white
 echo ""
 echo ""
@@ -422,3 +413,12 @@ read response
 if [ "$response" != "${response#[Yy]}" ] ;then
     softwareupdate -i -a --restart
 fi
+
+cecho "################################################################################" $white
+echo ""
+echo "A few manual things left:"
+echo "* Unbind Spotlight"
+echo "* Configure Alfred powerpack + hotkeys"
+echo "* Install Contexts.app"
+echo "* Load iterm2 profile"
+echo "* git config work"
