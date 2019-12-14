@@ -1,9 +1,9 @@
 echo "Mac OS Install Setup Script"
 echo "By Daniel Hallqvist (@dhq)"
 echo "Heavily inspired and shamelessly copied from script by Nina Zakharenko (@nnja)"
+echo "https://github.com/nnja/new-computer"
 
 # Colorize
-
 # Set the colours you can use
 black=$(tput setaf 0)
 red=$(tput setaf 1)
@@ -61,126 +61,112 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 ##############################
 # Prerequisite: Install Brew #
 ##############################
-#
-#echo "Installing brew..."
-#
-#if test ! $(which brew)
-#then
-#	## Don't prompt for confirmation when installing homebrew
-#  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
-#fi
-#
-## Latest brew, install brew cask
-#brew upgrade
-#brew update
-#brew tap caskroom/cask
-#
-#
+
+echo "Installing brew..."
+
+if test ! $(which brew)
+then
+	## Don't prompt for confirmation when installing homebrew
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
+fi
+
+# Latest brew, install brew cask
+brew upgrade
+brew update
+
 #############################################
 ### Generate ssh keys & add to ssh-agent
 ### See: https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
 #############################################
-# 
-# echo "Generating ssh keys, adding to ssh-agent..."
-# read -p 'Input email for ssh key: ' useremail
-# 
-# echo "Use default ssh file location, enter a passphrase: "
-# ssh-keygen -t rsa -b 4096 -C "$useremail"  # will prompt for password
-# eval "$(ssh-agent -s)"
-# 
-# # Now that sshconfig is synced add key to ssh-agent and
-# # store passphrase in keychain
-# ssh-add -K ~/.ssh/id_rsa
-# 
-# # If you're using macOS Sierra 10.12.2 or later, you will need to modify your ~/.ssh/config file to automatically load keys into the ssh-agent and store passphrases in your keychain.
-# 
-# if [ -e ~/.ssh/config ]
-# then
-#     echo "ssh config already exists. Skipping adding osx specific settings... "
-# else
-# 	echo "Writing osx specific settings to ssh config... "
-#    cat <<EOT >> ~/.ssh/config
-# 	Host *
-# 		AddKeysToAgent yes
-# 		UseKeychain yes
-# 		IdentityFile ~/.ssh/id_rsa
-# EOT
-# fi
-# 
+
+echo "Generating ssh keys, adding to ssh-agent..."
+read -p 'Input email for ssh key: ' useremail
+
+echo "Use default ssh file location, enter a passphrase: "
+ssh-keygen -t rsa -b 4096 -C "$useremail"  # will prompt for password
+eval "$(ssh-agent -s)"
+
+# Now that sshconfig is synced add key to ssh-agent and
+# store passphrase in keychain
+ssh-add -K ~/.ssh/id_rsa
+
+# If you're using macOS Sierra 10.12.2 or later, you will need to modify your ~/.ssh/config file to automatically load keys into the ssh-agent and store passphrases in your keychain.
+
+if [ -e ~/.ssh/config ]
+then
+    echo "ssh config already exists. Skipping adding osx specific settings... "
+else
+	echo "Writing osx specific settings to ssh config... "
+   cat <<EOT >> ~/.ssh/config
+	Host *
+		AddKeysToAgent yes
+		UseKeychain yes
+		IdentityFile ~/.ssh/id_rsa
+EOT
+fi
+
 #############################################
 ### Add ssh-key to GitHub via api
 #############################################
-# 
-# echo "Adding ssh-key to GitHub (via api)..."
-# echo "Important! For this step, use a github personal token with the admin:public_key permission."
-# echo "If you don't have one, create it here: https://github.com/settings/tokens/new"
-# 
-# retries=3
-# SSH_KEY=`cat ~/.ssh/id_rsa.pub`
-# 
-# for ((i=0; i<retries; i++)); do
-#       read -p 'GitHub username: ' ghusername
-#       read -p 'Machine name: ' ghtitle
-#       read -sp 'GitHub personal token: ' ghtoken
-# 
-#       gh_status_code=$(curl -o /dev/null -s -w "%{http_code}\n" -u "$ghusername:$ghtoken" -d '{"title":"'$ghtitle'","key":"'"$SSH_KEY"'"}' 'https://api.github.com/user/keys')
-# 
-#       if (( $gh_status_code -eq == 201))
-#       then
-#           echo "GitHub ssh key added successfully!"
-#           break
-#       else
-# 			echo "Something went wrong. Enter your credentials and try again..."
-#      		echo -n "Status code returned: "
-#      		echo $gh_status_code
-#       fi
-# done
-# 
-# [[ $retries -eq i ]] && echo "Adding ssh-key to GitHub failed! Try again later."
-# 
-# 
+echo "Adding ssh-key to GitHub (via api)..."
+echo "Important! For this step, use a github personal token with the admin:public_key permission."
+echo "If you don't have one, create it here: https://github.com/settings/tokens/new"
+
+retries=3
+SSH_KEY=`cat ~/.ssh/id_rsa.pub`
+
+for ((i=0; i<retries; i++)); do
+      read -p 'GitHub username: ' ghusername
+      read -p 'Machine name: ' ghtitle
+      read -sp 'GitHub personal token: ' ghtoken
+
+      gh_status_code=$(curl -o /dev/null -s -w "%{http_code}\n" -u "$ghusername:$ghtoken" -d '{"title":"'$ghtitle'","key":"'"$SSH_KEY"'"}' 'https://api.github.com/user/keys')
+
+      if (( $gh_status_code -eq == 201))
+      then
+          echo "GitHub ssh key added successfully!"
+          break
+      else
+			echo "Something went wrong. Enter your credentials and try again..."
+     		echo -n "Status code returned: "
+     		echo $gh_status_code
+      fi
+done
+
+[[ $retries -eq i ]] && echo "Adding ssh-key to GitHub failed! Try again later."
+
+
 ##############################
 # Install via Brew           #
 # ##############################
-# 
-# echo "Starting brew app install..."
-# 
-# ### Window Management
-# brew cask install slate iterm2 alfred google-chrome spotify slack vlc bartender emacs docker firefox
-# 
-# # ToDo: Set Slate etc to start at startup
-# 
-# ### Command line tools - install new ones, update others to latest version
-# brew install git wget zsh python pyenv fzf
-brew install vim  --with-lua
 
-# 
-# # Workflowy?
-# 
-# ### spacemacs github.com/syl20bnr/spacemacs
-# git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-# 
-# 
-# ### Run Brew Cleanup
-# brew cleanup
-# 
-# 
+ echo "Starting brew app install..."
 
+ ### Window Management
+ brew cask install slate iterm2 alfred google-chrome spotify slack vlc bartender emacs docker firefox workflowy
+
+ # ToDo: Set Slate etc to start at startup
+
+ ### Command line tools - install new ones, update others to latest version
+ brew install git wget zsh python pyenv fzf vim lastpass-cli autojump
+
+ ### spacemacs github.com/syl20bnr/spacemacs
+ git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+
+ ### Run Brew Cleanup
+ brew cleanup
 
 ############################################
 ### VIM Plug
 ###########################################
+ echo "Running vim-plug install..."
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-#############################################
-### Fonts
-#############################################
+##############################################
+#### Fonts
+##############################################
 
 echo "Installing fonts..."
-
-brew tap homebrew/cask-fonts
-
 ### programming fonts
 brew cask install font-fira-mono-for-powerline
 brew cask install font-fira-code
@@ -189,32 +175,31 @@ brew cask install font-source-code-pro-for-powerline
 ### SourceCodePro + Powerline + Awesome Regular (for powerlevel 9k terminal icons)
 cd ~/Library/Fonts && { curl -O 'https://github.com/Falkor/dotfiles/blob/master/fonts/SourceCodePro+Powerline+Awesome+Regular.ttf?raw=true' ; cd -; }
 
-
 #############################################
 ### Installs from Mac App Store
 #############################################
-# 
-# echo "Installing apps from the App Store..."
-# 
-# ### find app ids with: mas search "app name"
-# brew install mas
-# 
-# ### Mas login is currently broken on mojave. See:
-# ### Login manually for now.
-# 
-# cecho "Need to log in to App Store manually to install apps with mas...." $red
-# echo "Opening App Store. Please login."
-# open "/Applications/App Store.app"
-# echo "Is app store login complete.(y/n)? "
-# read response
-# if [ "$response" != "${response#[Yy]}" ]
-# then
-# 	mas install 526298438  # Lightshot
-# else
-# 	cecho "App Store login not complete. Skipping installing App Store Apps" $red
-# fi
-# 
-# 
+
+ echo "Installing apps from the App Store..."
+
+ ### find app ids with: mas search "app name"
+ brew install mas
+
+ ### Mas login is currently broken on mojave. See:
+ ### Login manually for now.
+
+ cecho "Need to log in to App Store manually to install apps with mas...." $red
+ echo "Opening App Store. Please login."
+ open "/Applications/App Store.app"
+ echo "Is app store login complete.(y/n)? "
+ read response
+ if [ "$response" != "${response#[Yy]}" ]
+ then
+ 	mas install 526298438  # Lightshot
+ else
+ 	cecho "App Store login not complete. Skipping installing App Store Apps" $red
+ fi
+
+
 #############################################
 ### Set OSX Preferences - Borrowed from https://github.com/mathiasbynens/dotfiles/blob/master/.macos
 #############################################
@@ -385,42 +370,42 @@ defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 
+##############################################
+# Install oh-my-zsh
+##############################################
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+
+
+##############################################
+# Install Node, n, yarn, global node pkgs
+##############################################
+
 #############################################
 ### Install dotfiles repo, run link script
 #############################################
+
 echo "Copying dotfiles from Github"
 mkdir ~/git
 cd ~/git
 git clone git@github.com:dhq/dotfiles.git dotfiles
 ln -s ~/git/dotfiles/.zshrc ~/.zshrc
 ln -s ~/git/dotfiles/.bash_profile ~/.bash_profile
+ln -s ~/git/dotfiles/.bash_prompo ~/.bash_prompt
 ln -s ~/git/dotfiles/.bashrc ~/.bashrc
 ln -s ~/git/dotfiles/.slate ~/.slate
 ln -s ~/git/dotfiles/.spacemacs ~/.spacemacs
 ln -s ~/git/dotfiles/.vimrc ~/.vimrc
 cd ~
 
-# TODO: 
-# clean up my personal repo to make it public
-# dotfiles for vs code, emacs, gitconfig, oh my zsh, etc. 
-# git clone git@github.com:nnja/dotfiles.git
-# cd dotfiles
-# fetch submodules for oh-my-zsh
-# git submodule init && git submodule update && git submodule status
-# make symbolic links and change shell to zshell
-# ./makesymlinks.sh
-# upgrade_oh_my_zsh
-
-
-
-# Stuff left
+# --- STUFF LEFT -----
 # Unbind spotlight
 # configure Alfred
 ## Hotkey
-## Lastpass
 ## Powerpack
 # Install contexts
-# Iterm2 profile
+# Load Iterm2 profile
 
 echo ""
 cecho "Done!" $cyan
