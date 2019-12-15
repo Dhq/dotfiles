@@ -135,33 +135,37 @@ done
 
 [[ $retries -eq i ]] && echo "Adding ssh-key to GitHub failed! Try again later."
 
-
 ##############################
 # Install via Brew           #
 # ##############################
 
- echo "Starting brew app install..."
+echo "Starting brew app install..."
 
- ### Window Management
- brew cask install slate iterm2 alfred google-chrome spotify slack vlc bartender emacs docker firefox workflowy
+### Window Management
+brew cask install slate iterm2 alfred google-chrome spotify slack vlc bartender emacs docker firefox workflowy
 
- # ToDo: Set Slate etc to start at startup
+# ToDo: Set Slate etc to start at startup
 
- ### Command line tools - install new ones, update others to latest version
- brew install git wget zsh python pyenv fzf vim lastpass-cli autojump n yarn
+### Command line tools - install new ones, update others to latest version
+brew install git wget zsh python pyenv fzf vim lastpass-cli autojump n yarn
 
- ### spacemacs github.com/syl20bnr/spacemacs
- git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+### spacemacs github.com/syl20bnr/spacemacs - using develop branch
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+cd ~/.emacs.d && git fetch && git checkout develop
+cd ~
 
- ### Run Brew Cleanup
- brew cleanup
+### Run Brew Cleanup
+brew cleanup
 
 ############################################
 ### VIM Plug
 ###########################################
- echo "Running vim-plug install..."
+
+echo "Running vim-plug install..."
+
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 ##############################################
 #### Fonts
 ##############################################
@@ -207,7 +211,6 @@ cd ~/Library/Fonts && { curl -O 'https://github.com/Falkor/dotfiles/blob/master/
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
-
 
 ##################
 ### Finder, Dock, & Menu Items
@@ -303,7 +306,6 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 # Use function F1, F, etc keys as standard function keys
 defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
-
 
 ###############################################################################
 # Screenshots / Screen                                                        #
