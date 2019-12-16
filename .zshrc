@@ -61,7 +61,7 @@ DEFAULT_USER="danhal"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git npm brew osx z extract jsontools yarn vi-mode zsh-syntax-highlighting)
+plugins=(git npm brew osx z extract jsontools yarn vi-mode)
 
 # User configuration
 
@@ -78,7 +78,7 @@ eval "$(pyenv init -)"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
  
 # Activates the correct virtualenv automatically when entering a project.
-eval "$(pyenv virtualenv-init -)"
+# eval "$(pyenv virtualenv-init -)"
 
 source $ZSH/oh-my-zsh.sh
 source "/usr/local/opt/fzf/shell/key-bindings.zsh"
@@ -113,8 +113,9 @@ alias ea="vim ~/.zshrc"
 alias ev="vim ~/.vimrc"
 alias eh="sudo vim /etc/hosts"
 alias ez="vim ~/.zshrc"
-alias fg="cd ~/git/nordnet"
-alias fgo="cd ~/git/nordnet/oss"
+alias fg="cd ~/git"
+alias fn="cd ~/git/nordnet"
+alias fo="cd ~/git/oss"
 alias fh="cd ~";
 alias gs="git status"
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
@@ -124,8 +125,7 @@ alias fresh="git checkout master -f && git pull && yarn";
 alias check_port="nc -vz $1 $2";
 alias ec="emacsclient $1 -a '' -nqc";
 alias es="emacsclient $1 -a ''";
-alias beep='echo -e "\a"'
-
-alias rc="~/git/react-component-setup-script/react-component-setup $1"
+alias lps="lpass ls --long | grep $1";
+alias lpp="lpass show $1 -cp";
 
 [ -f /usr/local/etc/profile.d/autojump.sh  ] && . /usr/local/etc/profile.d/autojump.sh
