@@ -277,8 +277,8 @@ defaults write com.apple.menuextra.battery ShowPercent -bool true
 defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.bluetooth" -int 0
 
 # Faster key repeat
-defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write NSGlobalDomain InitialKeyRepeat -int 25
 
 # Menu bar: hide the Time Machine, User icons, but show the volume Icon.
 for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
