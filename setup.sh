@@ -381,7 +381,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 # Install global node pkgs
 ##############################################
 
-yarn global add tern eslint yalc micro-proxy babel-cli cost-of-modules prettier
+yarn global add tern eslint yalc micro-proxy babel-cli cost-of-modules prettier typescript import-js
 
 #############################################
 ### Install dotfiles repo, run link script
