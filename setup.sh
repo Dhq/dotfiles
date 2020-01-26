@@ -393,7 +393,7 @@ cd ~/git
 git clone git@github.com:dhq/dotfiles.git dotfiles
 ln -s ~/git/dotfiles/.zshrc ~/.zshrc
 ln -s ~/git/dotfiles/.bash_profile ~/.bash_profile
-ln -s ~/git/dotfiles/.bash_prompo ~/.bash_prompt
+ln -s ~/git/dotfiles/.bash_prompt ~/.bash_prompt
 ln -s ~/git/dotfiles/.bashrc ~/.bashrc
 ln -s ~/git/dotfiles/.slate ~/.slate
 ln -s ~/git/dotfiles/.spacemacs ~/.spacemacs
