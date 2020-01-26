@@ -147,7 +147,7 @@ brew cask install slate iterm2 alfred google-chrome spotify slack vlc bartender 
 # ToDo: Set Slate etc to start at startup
 
 ### Command line tools - install new ones, update others to latest version
-brew install git wget zsh python pyenv fzf vim lastpass-cli autojump n yarn
+brew install git wget zsh python pyenv fzf vim lastpass-cli autojump n yarn htop
 
 ### spacemacs github.com/syl20bnr/spacemacs - using develop branch
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
