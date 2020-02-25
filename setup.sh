@@ -147,7 +147,7 @@ brew cask install slate iterm2 alfred google-chrome spotify slack vlc bartender 
 # ToDo: Set Slate etc to start at startup
 
 ### Command line tools - install new ones, update others to latest version
-brew install git wget zsh python pyenv fzf vim lastpass-cli autojump n yarn
+brew install git wget zsh python pyenv fzf vim lastpass-cli autojump n yarn htop
 
 ### spacemacs github.com/syl20bnr/spacemacs - using develop branch
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
@@ -277,8 +277,8 @@ defaults write com.apple.menuextra.battery ShowPercent -bool true
 defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.bluetooth" -int 0
 
 # Faster key repeat
-defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write NSGlobalDomain InitialKeyRepeat -int 25
 
 # Menu bar: hide the Time Machine, User icons, but show the volume Icon.
 for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
@@ -381,7 +381,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 # Install global node pkgs
 ##############################################
 
-yarn global add tern eslint yalc micro-proxy babel-cli cost-of-modules prettier
+yarn global add tern eslint yalc micro-proxy babel-cli cost-of-modules prettier typescript import-js
 
 #############################################
 ### Install dotfiles repo, run link script
@@ -393,7 +393,7 @@ cd ~/git
 git clone git@github.com:dhq/dotfiles.git dotfiles
 ln -s ~/git/dotfiles/.zshrc ~/.zshrc
 ln -s ~/git/dotfiles/.bash_profile ~/.bash_profile
-ln -s ~/git/dotfiles/.bash_prompo ~/.bash_prompt
+ln -s ~/git/dotfiles/.bash_prompt ~/.bash_prompt
 ln -s ~/git/dotfiles/.bashrc ~/.bashrc
 ln -s ~/git/dotfiles/.slate ~/.slate
 ln -s ~/git/dotfiles/.spacemacs ~/.spacemacs

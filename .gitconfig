@@ -1,27 +1,27 @@
 [user]
-	name = Daniel Hallqvist
-[includeIf "gitdir:~/git"]
-	path = ~.gitconfig_oss
-[includeIf "gitdir:~/git/oss"]
-	path = ~.gitconfig_oss
-[includeIf "gitdir:~/git/nordnet"]
-	path = ~.gitconfig_nordnet
+    name = Daniel Hallqvist
+    email = dhallqvist91@gmail.com
+
+[includeIf "gitdir:~/git/oss/"]
+    path = ~/.gitconfig_oss
+[includeIf "gitdir:~/git/nordnet/"]
+    path = ~/.gitconfig_nordnet
 
 [github]
-	user = dhq
+    user = dhq
 
 [core]
-	editor = vim
+    editor = vim
 
 [credential]
-	helper = osxkeychain
+    helper = osxkeychain
 
 [grep]
-	lineNumber = true
+    lineNumber = true
 
 [push]
-	default = simple
-	followTags = true
+    default = simple
+    followTags = true
 
 [fetch]
-	prune = true
+    prune = true
