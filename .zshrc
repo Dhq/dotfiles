@@ -61,7 +61,7 @@ DEFAULT_USER="danhal"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git npm brew osx z extract jsontools yarn vi-mode)
+plugins=(git npm brew osx node z extract jsontools yarn vi-mode osx)
 
 # User configuration
 
@@ -82,6 +82,7 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 source $ZSH/oh-my-zsh.sh
 source "/usr/local/opt/fzf/shell/key-bindings.zsh"
+export FZF_CTRL_T_COMMAND='ag --hidden --ignore .git --ignore node_modules --ignore Library -g ""'
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -119,6 +120,7 @@ alias fo="cd ~/git/oss"
 alias fh="cd ~";
 alias gs="git status"
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gfb="git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git checkout"
 alias links="ll node_modules | grep '>'"
 alias lv="npm view $1 version"
 alias fresh="git checkout master -f && git pull && yarn";
