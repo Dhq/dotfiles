@@ -120,7 +120,8 @@ alias fo="cd ~/git/oss"
 alias fh="cd ~";
 alias gs="git status"
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias gfb="git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git checkout"
+alias gf="git fetch --all"
+alias gb="git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git checkout"
 alias links="ll node_modules | grep '>'"
 alias lv="npm view $1 version"
 alias fresh="git checkout master -f && git pull && yarn";

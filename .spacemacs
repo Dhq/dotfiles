@@ -32,7 +32,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '("~/.emacs.d/private/")
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(python
+   '(
      ansible
      yaml
      (typescript :variables
@@ -50,6 +50,7 @@ This function should only modify configuration layer settings."
                  js2-basic-offset 2
                  node-add-modules-path t
                  javascript-import-tool 'import-js
+                 javascript-repl 'nodejs
                  js-indent-level 2)
 
      ;; ----------------------------------------------------------------
@@ -65,8 +66,9 @@ This function should only modify configuration layer settings."
      (osx :variables osx-use-option-as-meta nil)
     sql
     react
-     org
-   ;; neotree
+    docker
+    org
+    neotree
     (shell :variables
            shell-default-height 30
            shell-default-position 'bottom)
@@ -425,25 +427,24 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  ;; (spacemacs/toggle-highlight-current-line-globally-off)
-
   (editorconfig-mode 1)
 
   (setq-default typescript-indent-level 2)
 
-  ;; vim like inc / dec nr 
+  (setq neo-theme 'icons)
+
+  ;; vim like inc / dec nr
   (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
   (define-key evil-visual-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
   (define-key evil-normal-state-map (kbd "C-x") 'evil-numbers/dec-at-pt)
   (define-key evil-visual-state-map (kbd "C-x") 'evil-numbers/dec-at-pt)
-
 
   ;; Prettier
  (add-hook 'js2-mode-hook 'prettier-js-mode)
  (add-hook 'web-mode-hook 'prettier-js-mode)
  (add-hook 'react-mode-hook 'prettier-js-mode)
  (add-hook 'typescript-mode-hook 'prettier-js-mode)
-  ;; prettier settings
+  ;; prettier default settings
   (setq prettier-js-args '(
                            "--trailing-comma" "all"
                            "--single-quote"
@@ -452,8 +453,6 @@ you should place your code here."
 
   ;; macOS-slowness fix?
   (which-key-remove-default-unicode-chars)
-
-  ;; Keybindings
 
   ;; to enable the characters found using modifier keys + number on mac os
   (setq default-input-method "MacOSX")
@@ -471,7 +470,6 @@ you should place your code here."
   ;; use only eslint with flycheck
   (require 'flycheck)
 
-  (setq tide-format-options '(:indentSize 2 :tabSize 2))
 
   ;; disable jshint since we prefer eslint checking
   (setq-default flycheck-disabled-checkers
@@ -484,7 +482,7 @@ you should place your code here."
 
   ;;; When opening a file that is a symbolic link, don't ask whether I
   ;;; want to follow the link. Just do it
-    (setq find-file-visit-truename t)
+  (setq find-file-visit-truename t)
 
   ;; use local eslint if one exists
   (defun my/use-eslint-from-node-modules ()
