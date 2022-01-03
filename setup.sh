@@ -70,7 +70,7 @@ then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
 fi
 
-# Latest brew, install brew cask
+# Latest brew, install brew 
 brew upgrade
 brew update
 
@@ -105,36 +105,6 @@ else
 EOT
 fi
 
-#############################################
-### Add ssh-key to GitHub via api
-#############################################
-echo "Adding ssh-key to GitHub (via api)..."
-echo "Important! For this step, use a github personal token with the admin:public_key permission."
-echo "If you don't have one, create it here: https://github.com/settings/tokens/new"
-
-retries=3
-SSH_KEY=`cat ~/.ssh/id_rsa.pub`
-
-for ((i=0; i<retries; i++)); do
-      read -p 'GitHub username: ' ghusername
-      read -p 'Machine name: ' ghtitle
-      read -sp 'GitHub personal token: ' ghtoken
-
-      gh_status_code=$(curl -o /dev/null -s -w "%{http_code}\n" -u "$ghusername:$ghtoken" -d '{"title":"'$ghtitle'","key":"'"$SSH_KEY"'"}' 'https://api.github.com/user/keys')
-
-      if (( $gh_status_code -eq == 201))
-      then
-          echo "GitHub ssh key added successfully!"
-          break
-      else
-			echo "Something went wrong. Enter your credentials and try again..."
-     		echo -n "Status code returned: "
-     		echo $gh_status_code
-      fi
-done
-
-[[ $retries -eq i ]] && echo "Adding ssh-key to GitHub failed! Try again later."
-
 ##############################
 # Install via Brew           #
 # ##############################
@@ -142,12 +112,11 @@ done
 echo "Starting brew app install..."
 
 ### Window Management
-brew cask install slate iterm2 alfred google-chrome spotify slack vlc bartender emacs docker firefox workflowy
+brew install slate iterm2 alfred google-chrome spotify slack vlc bartender emacs docker firefox workflowy visual-studio-code 
 
-# ToDo: Set Slate etc to start at startup
+brew install git wget zsh python pyenv fzf vim  autojump n yarn htop svn defaultbrowser
 
-### Command line tools - install new ones, update others to latest version
-brew install git wget zsh python pyenv fzf vim lastpass-cli autojump n yarn htop
+defaultbrowser chrome
 
 ### spacemacs github.com/syl20bnr/spacemacs - using develop branch
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
@@ -172,9 +141,8 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 echo "Installing fonts..."
 ### programming fonts
-brew cask install font-fira-mono-for-powerline
-brew cask install font-fira-code
-brew cask install font-source-code-pro-for-powerline
+brew tap homebrew/cask-fonts 
+brew install font-fira-mono-for-powerline font-fira-code font-source-code-pro-for-powerline
 
 ### SourceCodePro + Powerline + Awesome Regular (for powerlevel 9k terminal icons)
 cd ~/Library/Fonts && { curl -O 'https://github.com/Falkor/dotfiles/blob/master/fonts/SourceCodePro+Powerline+Awesome+Regular.ttf?raw=true' ; cd -; }
@@ -231,6 +199,9 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # Finder: show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# repeat keys on hold, not show the alt character modal 
+defaults write -g ApplePressAndHoldEnabled -bool false
 
 # Remove the auto-hiding Dock delay
 defaults write com.apple.dock autohide-delay -float 0
@@ -419,8 +390,9 @@ fi
 cecho "################################################################################" $white
 echo ""
 echo "A few manual things left:"
-echo "* Unbind Spotlight"
+echo "* Unbind Spotlight hotkeys (Settings > Spotlight > Keyboard shortcuts)"
 echo "* Configure Alfred powerpack + hotkeys"
-echo "* Install Contexts.app"
-echo "* Load iterm2 profile"
-echo "* git config work"
+echo "* Install Contexts.app + add license https://contexts.co/"
+echo "* Load iterm2 profile (Preferences > General > Prefrences > Load pref from a custom folder > this dotfiles folder)"
+echo "* set up gitconfig for work, base it on .gitconfig_oss in this folder and add the new file to .gitconfig"
+echo "* set startup apps. Settings > user > login items (Alfred, Contexts, Slate)"

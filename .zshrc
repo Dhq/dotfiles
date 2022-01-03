@@ -1,15 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/danhal/.oh-my-zsh
-# source $(brew --prefix nvm)/nvm.sh
-# [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
 export NODE_PATH="/usr/local/lib/node_modules"
 source /Users/danhal/.bash_profile
-# export PATH=/usr/local/share/npm/bin:$PATH
-# export PATH=$HOME/bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH
-export PATH="$HOME/.npm-packages/bin:$PATH"
-export PATH=/npm/bin:$PATH
-export PATH="$HOME/bin/:$PATH"
-
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -61,14 +53,17 @@ DEFAULT_USER="danhal"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git npm brew osx node z extract jsontools yarn vi-mode osx)
+plugins=(git npm brew macos node z extract jsontools yarn vi-mode fzf)
 
-# User configuration
+# User configuration and path stuff
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-# export MANPATH="/usr/local/man:$MANPATH"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$HOME/.npm-packages/bin:$PATH"
+export PATH=/npm/bin:$PATH
+export PATH="$HOME/bin/:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
  
 # Enables shims and autocompletion
 eval "$(pyenv init -)"
@@ -81,7 +76,8 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 # eval "$(pyenv virtualenv-init -)"
 
 source $ZSH/oh-my-zsh.sh
-source "/usr/local/opt/fzf/shell/key-bindings.zsh"
+
+export FZF_BASE="$HOME/.fzf"
 export FZF_CTRL_T_COMMAND='ag --hidden --ignore .git --ignore node_modules --ignore Library -g ""'
 
 # You may need to manually set your language environment
@@ -110,25 +106,24 @@ KEYTIMEOUT=1
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias ea="vim ~/.zshrc"
-alias ev="vim ~/.vimrc"
-alias eh="sudo vim /etc/hosts"
-alias ez="vim ~/.zshrc"
-alias fg="cd ~/git"
-alias fn="cd ~/git/nordnet"
-alias fo="cd ~/git/oss"
+alias ea="vim ~/.zshrc";
+alias ev="vim ~/.vimrc";
+alias eh="sudo vim /etc/hosts";
+alias ez="vim ~/.zshrc";
+alias fg="cd ~/git";
+alias fn="cd ~/git/nordnet";
+alias fo="cd ~/git/oss";
 alias fh="cd ~";
-alias gs="git status"
-alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias gf="git fetch --all"
-alias gb="git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git checkout"
-alias links="ll node_modules | grep '>'"
-alias lv="npm view $1 version"
+alias gs="git status";
+alias gb="git for-each-ref --format=‘%(refname:short)’ refs/heads | fzf | xargs git checkout";
+alias gpn="git push --no-verify";
+alias gpfn="gpf --no-verify";
+alias links="ll node_modules | grep ‘>'";
+alias lv="npm view $1 version";
 alias fresh="git checkout master -f && git pull && yarn";
-alias check_port="nc -vz $1 $2";
-alias ec="emacsclient $1 -a '' -nqc";
-alias es="emacsclient $1 -a ''";
-alias lps="lpass ls --long | grep $1";
-alias lpp="lpass show $1 -cp";
+alias check_port="nc -vz 127.0.0.1 $1";
+alias rl="source ~/.zshrc";
+alias yis="yarn --ignore-scripts";
+alias yat="yarn add-test";
 
-[ -f /usr/local/etc/profile.d/autojump.sh  ] && . /usr/local/etc/profile.d/autojump.sh
+[ -s `brew --prefix`/etc/autojump.sh ] && . `brew --prefix`/etc/autojump.sh 
